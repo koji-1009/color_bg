@@ -1,6 +1,8 @@
-import 'package:color_bg/ui/home.dart';
 import 'package:flutter/material.dart';
 
+import 'ui/home.dart';
+
+/// Main app class
 class App extends StatelessWidget {
   // This widget is the root of your application.
   @override
