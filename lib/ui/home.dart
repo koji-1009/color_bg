@@ -1,88 +1,209 @@
+import 'package:color_bg/data/model/color_value.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-/// Home Page
-class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+import '../constants.dart';
+import '../util/ext/color_value_ext.dart';
+import 'home_view_model.dart';
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  /// title
-  final String title;
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class HomePage extends StatelessWidget {
+  final _colorSize = const Size(120, 120);
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+    final textStyle = Theme.of(context).textTheme.headline6;
+
+    return HookBuilder(
+      builder: (context) {
+        final homeViewModel = context.read(homeViewModelNotifierProvider);
+        final question = useProvider(
+          homeViewModelNotifierProvider.select((value) => value.question),
+        );
+        final answer = useProvider(
+          homeViewModelNotifierProvider.select((value) => value.answer),
+        );
+
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text(Constants.appName),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.refresh),
+                onPressed: homeViewModel.changeColor,
+              ),
+            ],
+          ),
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 24,
+                horizontal: 16,
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    height: _colorSize.height,
+                    width: _colorSize.width,
+                    color: question.color,
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'R',
+                        style: textStyle,
+                      ),
+                      Expanded(
+                        child: Slider(
+                          value: answer.r.toDouble(),
+                          min: 0,
+                          max: 255,
+                          label: answer.r.toString(),
+                          divisions: 256,
+                          onChanged: (value) {
+                            homeViewModel.update(r: value.round());
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        width: 40,
+                        child: Text(
+                          answer.r.toString(),
+                          style: textStyle,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'G',
+                        style: textStyle,
+                      ),
+                      Expanded(
+                        child: Slider(
+                          value: answer.g.toDouble(),
+                          min: 0,
+                          max: 255,
+                          label: answer.g.toString(),
+                          divisions: 256,
+                          onChanged: (value) {
+                            homeViewModel.update(g: value.round());
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        width: 40,
+                        child: Text(
+                          answer.g.toString(),
+                          style: textStyle,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'B',
+                        style: textStyle,
+                      ),
+                      Expanded(
+                        child: Slider(
+                          value: answer.b.toDouble(),
+                          min: 0,
+                          max: 255,
+                          label: answer.b.toString(),
+                          divisions: 256,
+                          onChanged: (value) {
+                            homeViewModel.update(b: value.round());
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        width: 40,
+                        child: Text(
+                          answer.b.toString(),
+                          style: textStyle,
+                        ),
+                      ),
+                    ],
+                  ),
+                  RaisedButton(
+                    child: const Text('Check answer'),
+                    onPressed: () {
+                      _showResultSheet(
+                        context: context,
+                        question: question,
+                        answer: answer,
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showResultSheet({
+    @required BuildContext context,
+    @required ColorValue question,
+    @required ColorValue answer,
+  }) {
+    final textStyle = Theme.of(context).textTheme.subtitle1;
+
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              question == answer ? 'Correct!' : 'Wrong',
+              style: Theme.of(context).textTheme.headline5,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Table(
+              children: [
+                TableRow(
+                  children: [
+                    Text(
+                      'Question',
+                      style: textStyle,
+                    ),
+                    Text(
+                      'Answer',
+                      style: textStyle,
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Container(
+                      height: _colorSize.height,
+                      width: _colorSize.width,
+                      color: question.color,
+                    ),
+                    Container(
+                      height: _colorSize.height,
+                      width: _colorSize.width,
+                      color: answer.color,
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

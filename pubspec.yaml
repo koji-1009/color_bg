@@ -18,10 +18,15 @@ dependencies:
   shared_preferences: ^0.5.12+4
   enum_to_string: ^1.0.13
 
+  freezed_annotation:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   effective_dart: ^1.0.0
+
+  build_runner:
+  freezed:
 
 flutter:
   uses-material-design: true

@@ -21,7 +21,7 @@ class App extends HookWidget {
             title: Constants.appName,
             theme: snapshot.data ?? lightTheme,
             darkTheme: darkTheme,
-            home: HomePage(title: Constants.appName),
+            home: HomePage(),
           )
         : const Center(child: CircularProgressIndicator());
   }

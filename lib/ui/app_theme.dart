@@ -11,11 +11,11 @@ final appThemeNotifierProvider =
     ChangeNotifierProvider<AppTheme>((ref) => AppTheme(ref));
 
 ThemeData get lightTheme {
-  return ThemeData.from(colorScheme: ColorScheme.light());
+  return ThemeData.from(colorScheme: const ColorScheme.light());
 }
 
 ThemeData get darkTheme {
-  return ThemeData.from(colorScheme: ColorScheme.dark());
+  return ThemeData.from(colorScheme: const ColorScheme.dark());
 }
 
 class AppTheme extends AppChangeNotifier {
