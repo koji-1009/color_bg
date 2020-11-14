@@ -2,14 +2,14 @@ import 'dart:math';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../data/model/color_value.dart';
-import 'change_notifier_with_error_handle.dart';
+import '../../data/model/color_value.dart';
+import '../change_notifier_with_error_handle.dart';
 
 final homeViewModelNotifierProvider =
-    ChangeNotifierProvider((ref) => HomeViewModel(ref));
+    ChangeNotifierProvider((ref) => RgbViewModel(ref));
 
-class HomeViewModel extends AppChangeNotifier {
-  HomeViewModel(ProviderReference ref) : super(ref) {
+class RgbViewModel extends AppChangeNotifier {
+  RgbViewModel(ProviderReference ref) : super(ref) {
     _answer = ColorValue(
       r: 0,
       g: 0,

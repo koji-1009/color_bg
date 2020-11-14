@@ -1,13 +1,13 @@
-import 'package:color_bg/data/model/color_value.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../constants.dart';
-import '../util/ext/color_value_ext.dart';
-import 'home_view_model.dart';
+import '../../constants.dart';
+import '../../data/model/color_value.dart';
+import '../../util/ext/color_value_ext.dart';
+import 'rgb_view_model.dart';
 
-class HomePage extends StatelessWidget {
+class RgbPage extends StatelessWidget {
   final _colorSize = const Size(120, 120);
 
   @override
