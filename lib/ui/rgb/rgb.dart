@@ -26,7 +26,7 @@ class RgbPage extends StatelessWidget {
         return Scaffold(
           bottomNavigationBar: BottomAppBar(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -168,6 +168,15 @@ class RgbPage extends StatelessWidget {
                         );
                       },
                     ),
+                    RaisedButton(
+                      child: const Text('Give up!'),
+                      onPressed: () {
+                        _showGiveUpSheet(
+                          context: context,
+                          question: question,
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -230,6 +239,29 @@ class RgbPage extends StatelessWidget {
               ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  void _showGiveUpSheet({
+    @required BuildContext context,
+    @required ColorValue question,
+  }) {
+    final textStyle = Theme.of(context).textTheme.headline6;
+
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => SizedBox(
+        height: 200,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Center(
+            child: Text(
+              'R: ${question.r}, G: ${question.g}, B: ${question.b}',
+              style: textStyle,
+            ),
+          ),
         ),
       ),
     );
