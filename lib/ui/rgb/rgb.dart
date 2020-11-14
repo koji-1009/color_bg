@@ -87,6 +87,11 @@ class RgbPage extends StatelessWidget {
                             style: textStyle,
                           ),
                         ),
+                        Container(
+                          height: 20,
+                          width: 20,
+                          color: answer.colorR,
+                        ),
                       ],
                     ),
                     Row(
@@ -114,6 +119,11 @@ class RgbPage extends StatelessWidget {
                             style: textStyle,
                           ),
                         ),
+                        Container(
+                          height: 20,
+                          width: 20,
+                          color: answer.colorG,
+                        ),
                       ],
                     ),
                     Row(
@@ -140,6 +150,11 @@ class RgbPage extends StatelessWidget {
                             answer.b.toString(),
                             style: textStyle,
                           ),
+                        ),
+                        Container(
+                          height: 20,
+                          width: 20,
+                          color: answer.colorB,
                         ),
                       ],
                     ),
