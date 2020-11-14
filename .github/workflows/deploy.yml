@@ -1,0 +1,32 @@
+name: Deploy
+
+on: 
+  push:
+    branches: 
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install flutter (beta channel)
+      uses: subosito/flutter-action@v1
+      with:
+        channel: 'beta'
+    - name: Enable Flutter for Web
+      run: flutter config --enable-web
+    - name: Build Flutter for Web
+      run: flutter build web
+    - name: Create dir
+      run: mkdir public
+    - name: copy resource
+      run: cp -rf build/web/* public/
+    - name: Deploy to Firebase
+      uses: w9jds/firebase-action@v2.0.0
+      with:
+        args: deploy --only hosting
+      env:
+        PROJECT_ID: ${{ secrets.PROJECT_ID }}
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
