@@ -29,17 +29,29 @@ class RgbPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   IconButton(
                     icon: const Icon(Icons.arrow_back),
                     onPressed: () {
                       Navigator.pop(context);
                     },
+                    tooltip: 'back screen',
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.flag_outlined),
+                    onPressed: () {
+                      _showGiveUpSheet(
+                        context: context,
+                        question: question,
+                      );
+                    },
+                    tooltip: 'give up',
                   ),
                   IconButton(
                     icon: const Icon(Icons.refresh),
                     onPressed: homeViewModel.changeColor,
+                    tooltip: 'refresh',
                   ),
                 ],
               ),
@@ -165,15 +177,6 @@ class RgbPage extends StatelessWidget {
                           context: context,
                           question: question,
                           answer: answer,
-                        );
-                      },
-                    ),
-                    RaisedButton(
-                      child: const Text('Give up!'),
-                      onPressed: () {
-                        _showGiveUpSheet(
-                          context: context,
-                          question: question,
                         );
                       },
                     ),
