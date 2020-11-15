@@ -1,29 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../constants.dart';
+import '../app_theme.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(Constants.appName),
+      bottomNavigationBar: BottomAppBar(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              PopupMenuButton<ThemeMode>(
+                onSelected: (result) async {
+                  final appTheme = context.read(appThemeNotifierProvider);
+                  await appTheme.updateTheme(result);
+                },
+                itemBuilder: (context) => <PopupMenuEntry<ThemeMode>>[
+                  const PopupMenuItem<ThemeMode>(
+                    value: ThemeMode.light,
+                    child: Text('Light theme'),
+                  ),
+                  const PopupMenuItem<ThemeMode>(
+                    value: ThemeMode.dark,
+                    child: Text('Dark theme'),
+                  ),
+                  const PopupMenuItem<ThemeMode>(
+                    value: ThemeMode.system,
+                    child: Text('System settings'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            RaisedButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  Constants.pageRgb,
-                );
-              },
-              child: const Text('RGB'),
-            ),
-          ],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              RaisedButton(
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    Constants.pageRgb,
+                  );
+                },
+                child: const Text('RGB'),
+              ),
+            ],
+          ),
         ),
       ),
     );

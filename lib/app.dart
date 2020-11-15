@@ -12,17 +12,15 @@ class App extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = useProvider(appThemeNotifierProvider);
-    final themeData = useMemoized(
-      () => appTheme.themeData,
-      [appTheme.setting],
-    );
-    final snapshot = useFuture(themeData);
+    final themeMode = useMemoized(() => appTheme.themeMode, [appTheme.setting]);
+    final snapshot = useFuture(themeMode);
 
     return snapshot.hasData
         ? MaterialApp(
             title: Constants.appName,
-            theme: snapshot.data ?? lightTheme,
+            theme: lightTheme,
             darkTheme: darkTheme,
+            themeMode: snapshot.data ?? ThemeMode.system,
             home: HomePage(),
             routes: {
               Constants.pageHome: (context) => HomePage(),
