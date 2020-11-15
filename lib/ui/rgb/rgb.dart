@@ -12,6 +12,15 @@ class RgbPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: _createBottomAppBar(context),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.check),
+        label: const Text('Check answer'),
+        onPressed: () {
+          _showResultSheet(context);
+        },
+      ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -87,12 +96,6 @@ class RgbPage extends StatelessWidget {
                     );
                   },
                 ),
-                RaisedButton(
-                  child: const Text('Check answer'),
-                  onPressed: () {
-                    _showResultSheet(context);
-                  },
-                ),
               ],
             ),
           ),
@@ -102,14 +105,12 @@ class RgbPage extends StatelessWidget {
   }
 
   Widget _createBottomAppBar(BuildContext context) {
-    final viewModel = context.read(rgbViewModelNotifierProvider);
-
     return BottomAppBar(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Row(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             IconButton(
               icon: const Icon(Icons.arrow_back),
@@ -124,11 +125,6 @@ class RgbPage extends StatelessWidget {
                 _showGiveUpSheet(context);
               },
               tooltip: 'give up',
-            ),
-            IconButton(
-              icon: const Icon(Icons.refresh),
-              onPressed: viewModel.changeColor,
-              tooltip: 'refresh',
             ),
           ],
         ),
@@ -219,6 +215,16 @@ class RgbPage extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 32,
+            ),
+            RaisedButton(
+              child: const Text('next color'),
+              onPressed: () {
+                _nextColor(context);
+                Navigator.of(context).pop();
+              },
+            ),
           ],
         ),
       ),
@@ -231,18 +237,32 @@ class RgbPage extends StatelessWidget {
 
     showModalBottomSheet(
       context: context,
-      builder: (context) => SizedBox(
-        height: 200,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Center(
-            child: Text(
+      builder: (context) => Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
               'R: ${question.r}, G: ${question.g}, B: ${question.b}',
               style: textStyle,
             ),
-          ),
+            const SizedBox(
+              height: 32,
+            ),
+            RaisedButton(
+              child: const Text('next color'),
+              onPressed: () {
+                _nextColor(context);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  void _nextColor(BuildContext context) {
+    context.read(rgbViewModelNotifierProvider).changeColor();
   }
 }

@@ -11,9 +11,9 @@ final rgbViewModelNotifierProvider =
 class RgbViewModel extends AppChangeNotifier {
   RgbViewModel(ProviderReference ref) : super(ref) {
     _answer = ColorRGB(
-      r: 0,
-      g: 0,
-      b: 0,
+      r: 125,
+      g: 125,
+      b: 125,
     );
 
     changeColor();
