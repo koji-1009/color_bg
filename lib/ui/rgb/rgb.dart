@@ -1,3 +1,4 @@
+import 'package:color_bootcamp/data/model/color_rgb.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -179,7 +180,7 @@ class RgbPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              question == answer ? 'Correct!' : 'Wrong',
+              _checkAnswer(question: question, answer: answer),
               style: Theme.of(context).textTheme.headline5,
             ),
             const SizedBox(
@@ -264,5 +265,24 @@ class RgbPage extends StatelessWidget {
 
   void _nextColor(BuildContext context) {
     context.read(rgbViewModelNotifierProvider).changeColor();
+  }
+
+  String _checkAnswer({
+    @required ColorRGB question,
+    @required ColorRGB answer,
+  }) {
+    final result = (question.r - answer.r).abs() +
+        (question.g - answer.g).abs() +
+        (question.b - answer.b).abs();
+
+    if (result <= 3) {
+      return 'Perfect!!!';
+    } else if (result <= 15) {
+      return 'Excellent!';
+    } else if (result <= 30) {
+      return 'Good';
+    } else {
+      return 'Wrong';
+    }
   }
 }
