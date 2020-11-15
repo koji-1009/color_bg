@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'constants.dart';
 import 'ui/app_theme.dart';
+import 'ui/component/loading.dart';
 import 'ui/home/home.dart';
 import 'ui/rgb/rgb.dart';
 
@@ -28,6 +29,6 @@ class App extends HookWidget {
               Constants.pageRgb: (context) => RgbPage(),
             },
           )
-        : const Center(child: CircularProgressIndicator());
+        : const Loading();
   }
 }

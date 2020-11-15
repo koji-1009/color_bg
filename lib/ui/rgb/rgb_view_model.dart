@@ -2,15 +2,15 @@ import 'dart:math';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/model/color_value.dart';
+import '../../data/model/color_rgb.dart';
 import '../change_notifier_with_error_handle.dart';
 
-final homeViewModelNotifierProvider =
+final rgbViewModelNotifierProvider =
     ChangeNotifierProvider((ref) => RgbViewModel(ref));
 
 class RgbViewModel extends AppChangeNotifier {
   RgbViewModel(ProviderReference ref) : super(ref) {
-    _answer = ColorValue(
+    _answer = ColorRGB(
       r: 0,
       g: 0,
       b: 0,
@@ -21,16 +21,16 @@ class RgbViewModel extends AppChangeNotifier {
 
   final _random = Random();
 
-  ColorValue _question;
+  ColorRGB _question;
 
-  ColorValue _answer;
+  ColorRGB get question => _question;
 
-  ColorValue get question => _question;
+  ColorRGB _answer;
 
-  ColorValue get answer => _answer;
+  ColorRGB get answer => _answer;
 
   void changeColor() {
-    _question = ColorValue(
+    _question = ColorRGB(
       r: _random.nextInt(256),
       g: _random.nextInt(256),
       b: _random.nextInt(256),
