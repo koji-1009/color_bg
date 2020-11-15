@@ -1,5 +1,5 @@
 name: color_bootcamp
-description: A new Flutter application.
+description: Color BootCamp.
 
 publish_to: 'none'
 
@@ -23,7 +23,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  effective_dart: ^1.0.0
+  effective_dart: ^1.3.0
 
   build_runner:
   freezed:
