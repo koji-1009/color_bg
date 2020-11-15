@@ -1,12 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/model/color_rgb.dart';
 import '../../util/ext/color_ext.dart';
-import 'rgb_view_model.dart';
+import 'hsv_view_model.dart';
 
-class RgbPage extends StatelessWidget {
+class HsvPage extends StatelessWidget {
   final _colorSize = 120.0;
 
   @override
@@ -35,7 +35,7 @@ class RgbPage extends StatelessWidget {
                   builder: (context) => Container(
                     height: _colorSize,
                     width: _colorSize,
-                    color: useProvider(rgbViewModelNotifierProvider)
+                    color: useProvider(hsvViewModelNotifierProvider)
                         .question
                         .color,
                   ),
@@ -45,54 +45,68 @@ class RgbPage extends StatelessWidget {
                 ),
                 HookBuilder(
                   builder: (context) {
-                    final answer = useProvider(rgbViewModelNotifierProvider
+                    final answer = useProvider(hsvViewModelNotifierProvider
                         .select((value) => value.answer));
 
                     return _createSpinner(
                       context: context,
-                      selectValue: answer.r,
-                      selectColor: Color.fromARGB(255, answer.r, 0, 0),
-                      title: 'R',
+                      selectValue: answer.h,
+                      selectColor:
+                          HSVColor.fromAHSV(1, answer.h, 1, 1).toColor(),
+                      title: 'H',
+                      min: 0.0,
+                      max: 360,
+                      divisions: 3600,
                       setValue: (value) {
                         context
-                            .read(rgbViewModelNotifierProvider)
-                            .update(r: value.round());
+                            .read(hsvViewModelNotifierProvider)
+                            .update(h: value);
                       },
                     );
                   },
                 ),
                 HookBuilder(
                   builder: (context) {
-                    final answer = useProvider(rgbViewModelNotifierProvider
+                    final answer = useProvider(hsvViewModelNotifierProvider
                         .select((value) => value.answer));
 
                     return _createSpinner(
                       context: context,
-                      selectValue: answer.g,
-                      selectColor: Color.fromARGB(255, 0, answer.g, 0),
-                      title: 'G',
+                      selectValue: answer.s,
+                      selectColor: HSVColor.fromColor(Colors.red)
+                          .withSaturation(answer.s)
+                          .toColor(),
+                      title: 'S',
+                      min: 0,
+                      max: 1,
+                      divisions: 100,
                       setValue: (value) {
                         context
-                            .read(rgbViewModelNotifierProvider)
-                            .update(g: value.round());
+                            .read(hsvViewModelNotifierProvider)
+                            .update(s: value);
                       },
                     );
                   },
                 ),
                 HookBuilder(
                   builder: (context) {
-                    final answer = useProvider(rgbViewModelNotifierProvider
+                    final answer = useProvider(hsvViewModelNotifierProvider
                         .select((value) => value.answer));
 
                     return _createSpinner(
                       context: context,
-                      selectValue: answer.b,
-                      selectColor: Color.fromARGB(255, 0, 0, answer.b),
-                      title: 'B',
+                      selectValue: answer.v,
+                      selectColor: HSVColor.fromColor(Colors.white)
+                          .withValue(answer.v)
+                          .toColor(),
+                      title: 'V',
+                      min: 0,
+                      max: 1,
+                      divisions: 100,
                       setValue: (value) {
                         context
-                            .read(rgbViewModelNotifierProvider)
-                            .update(b: value.round());
+                            .read(hsvViewModelNotifierProvider)
+                            .update(v: value);
                       },
                     );
                   },
@@ -135,8 +149,11 @@ class RgbPage extends StatelessWidget {
 
   Widget _createSpinner({
     @required BuildContext context,
-    @required int selectValue,
+    @required double selectValue,
     @required Color selectColor,
+    @required double min,
+    @required double max,
+    @required int divisions,
     @required String title,
     @required ValueSetter<double> setValue,
   }) =>
@@ -148,19 +165,19 @@ class RgbPage extends StatelessWidget {
           ),
           Expanded(
             child: Slider(
-              value: selectValue.toDouble(),
+              value: selectValue,
               activeColor: selectColor,
-              min: 0,
-              max: 255,
-              label: selectValue.toString(),
-              divisions: 256,
+              min: min,
+              max: max,
+              label: selectValue.toStringAsFixed(1),
+              divisions: divisions,
               onChanged: setValue,
             ),
           ),
           SizedBox(
-            width: 40,
+            width: 60,
             child: Text(
-              selectValue.toString(),
+              selectValue.toStringAsFixed(1),
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
@@ -169,8 +186,8 @@ class RgbPage extends StatelessWidget {
 
   void _showResultSheet(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.subtitle1;
-    final question = context.read(rgbViewModelNotifierProvider).question;
-    final answer = context.read(rgbViewModelNotifierProvider).answer;
+    final question = context.read(hsvViewModelNotifierProvider).question;
+    final answer = context.read(hsvViewModelNotifierProvider).answer;
 
     showModalBottomSheet(
       context: context,
@@ -180,7 +197,7 @@ class RgbPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              _checkAnswer(question: question, answer: answer),
+              question == answer ? 'Correct!' : 'Wrong',
               style: Theme.of(context).textTheme.headline5,
             ),
             const SizedBox(
@@ -234,7 +251,7 @@ class RgbPage extends StatelessWidget {
 
   void _showGiveUpSheet(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.headline6;
-    final question = context.read(rgbViewModelNotifierProvider).question;
+    final question = context.read(hsvViewModelNotifierProvider).question;
 
     showModalBottomSheet(
       context: context,
@@ -244,7 +261,7 @@ class RgbPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'R: ${question.r}, G: ${question.g}, B: ${question.b}',
+              'H: ${question.h}, S: ${question.s}, V: ${question.v}',
               style: textStyle,
             ),
             const SizedBox(
@@ -264,25 +281,6 @@ class RgbPage extends StatelessWidget {
   }
 
   void _nextColor(BuildContext context) {
-    context.read(rgbViewModelNotifierProvider).changeColor();
-  }
-
-  String _checkAnswer({
-    @required ColorRGB question,
-    @required ColorRGB answer,
-  }) {
-    final result = (question.r - answer.r).abs() +
-        (question.g - answer.g).abs() +
-        (question.b - answer.b).abs();
-
-    if (result <= 3) {
-      return 'Perfect!!!';
-    } else if (result <= 15) {
-      return 'Excellent!';
-    } else if (result <= 30) {
-      return 'Good';
-    } else {
-      return 'Wrong';
-    }
+    context.read(hsvViewModelNotifierProvider).changeColor();
   }
 }

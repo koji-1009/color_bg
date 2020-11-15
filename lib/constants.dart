@@ -6,4 +6,5 @@ class Constants {
 
   static const String pageHome = '/home';
   static const String pageRgb = '/rgb';
+  static const String pageHsv = '/hsv';
 }

@@ -54,6 +54,18 @@ class HomePage extends StatelessWidget {
                 },
                 child: const Text('RGB'),
               ),
+              const SizedBox(
+                height: 16,
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    Constants.pageHsv,
+                  );
+                },
+                child: const Text('HSV'),
+              ),
             ],
           ),
         ),

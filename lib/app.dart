@@ -6,6 +6,7 @@ import 'constants.dart';
 import 'ui/app_theme.dart';
 import 'ui/component/loading.dart';
 import 'ui/home/home.dart';
+import 'ui/hsv/hsv.dart';
 import 'ui/rgb/rgb.dart';
 
 class App extends HookWidget {
@@ -25,6 +26,7 @@ class App extends HookWidget {
             routes: {
               Constants.pageHome: (context) => HomePage(),
               Constants.pageRgb: (context) => RgbPage(),
+              Constants.pageHsv: (context) => HsvPage(),
             },
           )
         : const Loading();
