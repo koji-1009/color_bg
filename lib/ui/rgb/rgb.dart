@@ -281,6 +281,10 @@ class RgbPage extends StatelessWidget {
       return 'Excellent!';
     } else if (result <= 30) {
       return 'Good';
+    } else if (result <= 60) {
+      return 'Fair';
+    } else if (result <= 100) {
+      return 'Poor...';
     } else {
       return 'Wrong';
     }

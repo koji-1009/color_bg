@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../data/model/color_hsv.dart';
 import '../../util/ext/color_ext.dart';
 import 'hsv_view_model.dart';
 
@@ -201,7 +202,7 @@ class HsvPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              question == answer ? 'Correct!' : 'Wrong',
+              _checkAnswer(question: question, answer: answer),
               style: Theme.of(context).textTheme.headline5,
             ),
             const SizedBox(
@@ -288,5 +289,28 @@ class HsvPage extends StatelessWidget {
 
   void _nextColor(BuildContext context) {
     context.read(hsvViewModelNotifierProvider).changeColor();
+  }
+
+  String _checkAnswer({
+    @required ColorHSV question,
+    @required ColorHSV answer,
+  }) {
+    final result = (question.h - answer.h).abs() +
+        (question.s * 100 - answer.s * 100).abs() +
+        (question.v * 100 - answer.v * 100).abs();
+
+    if (result <= 3) {
+      return 'Perfect!!!';
+    } else if (result <= 10) {
+      return 'Excellent!';
+    } else if (result <= 30) {
+      return 'Good';
+    } else if (result <= 60) {
+      return 'Fair';
+    } else if (result <= 100) {
+      return 'Poor...';
+    } else {
+      return 'Wrong';
+    }
   }
 }
