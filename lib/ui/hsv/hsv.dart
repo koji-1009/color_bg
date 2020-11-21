@@ -57,6 +57,7 @@ class HsvPage extends StatelessWidget {
                       min: 0.0,
                       max: 360,
                       divisions: 3600,
+                      decimal: 1,
                       setValue: (value) {
                         context
                             .read(hsvViewModelNotifierProvider)
@@ -80,6 +81,7 @@ class HsvPage extends StatelessWidget {
                       min: 0,
                       max: 1,
                       divisions: 100,
+                      decimal: 2,
                       setValue: (value) {
                         context
                             .read(hsvViewModelNotifierProvider)
@@ -103,6 +105,7 @@ class HsvPage extends StatelessWidget {
                       min: 0,
                       max: 1,
                       divisions: 100,
+                      decimal: 2,
                       setValue: (value) {
                         context
                             .read(hsvViewModelNotifierProvider)
@@ -154,6 +157,7 @@ class HsvPage extends StatelessWidget {
     @required double min,
     @required double max,
     @required int divisions,
+    @required int decimal,
     @required String title,
     @required ValueSetter<double> setValue,
   }) =>
@@ -169,7 +173,7 @@ class HsvPage extends StatelessWidget {
               activeColor: selectColor,
               min: min,
               max: max,
-              label: selectValue.toStringAsFixed(1),
+              label: selectValue.toStringAsFixed(decimal),
               divisions: divisions,
               onChanged: setValue,
             ),
@@ -177,7 +181,7 @@ class HsvPage extends StatelessWidget {
           SizedBox(
             width: 60,
             child: Text(
-              selectValue.toStringAsFixed(1),
+              selectValue.toStringAsFixed(decimal),
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
