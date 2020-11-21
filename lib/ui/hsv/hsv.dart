@@ -265,7 +265,9 @@ class HsvPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'H: ${question.h}, S: ${question.s}, V: ${question.v}',
+              'H: ${question.h.toStringAsFixed(1)}, '
+              'S: ${question.s.toStringAsFixed(2)}, '
+              'V: ${question.v.toStringAsFixed(2)}',
               style: textStyle,
             ),
             const SizedBox(
