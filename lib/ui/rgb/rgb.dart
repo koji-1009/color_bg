@@ -180,7 +180,10 @@ class RgbPage extends StatelessWidget {
                       FixedExtentScrollController(initialItem: selectValue),
                   itemExtent: 24,
                   childCount: 256,
-                  itemBuilder: (context, index) => Text(index.toString()),
+                  itemBuilder: (context, index) => Text(
+                    index.toString(),
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
                   onSelectedItemChanged: setValue,
                 ),
               );
