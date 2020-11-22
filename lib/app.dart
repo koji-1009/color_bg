@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'constants.dart';
 import 'ui/app_theme.dart';
-import 'ui/component/loading.dart';
 import 'ui/home/home.dart';
 import 'ui/hsv/hsv.dart';
 import 'ui/rgb/rgb.dart';
@@ -16,19 +15,17 @@ class App extends HookWidget {
     final themeMode = useMemoized(() => appTheme.themeMode, [appTheme.setting]);
     final snapshot = useFuture(themeMode);
 
-    return snapshot.hasData
-        ? MaterialApp(
-            title: Constants.appName,
-            theme: lightTheme,
-            darkTheme: darkTheme,
-            themeMode: snapshot.data ?? ThemeMode.system,
-            home: HomePage(),
-            routes: {
-              Constants.pageHome: (context) => HomePage(),
-              Constants.pageRgb: (context) => RgbPage(),
-              Constants.pageHsv: (context) => HsvPage(),
-            },
-          )
-        : const Loading();
+    return MaterialApp(
+      title: Constants.appName,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: snapshot.data ?? ThemeMode.system,
+      home: HomePage(),
+      routes: {
+        Constants.pageHome: (context) => HomePage(),
+        Constants.pageRgb: (context) => RgbPage(),
+        Constants.pageHsv: (context) => HsvPage(),
+      },
+    );
   }
 }
