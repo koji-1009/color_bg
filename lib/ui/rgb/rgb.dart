@@ -194,8 +194,13 @@ class RgbPage extends StatelessWidget {
 
   void _showResultSheet(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.subtitle1;
-    final question = context.read(rgbViewModelNotifierProvider).question;
-    final answer = context.read(rgbViewModelNotifierProvider).answer;
+
+    final viewModel = context.read(rgbViewModelNotifierProvider);
+    final question = viewModel.question;
+    final answer = viewModel.answer;
+
+    viewModel.countUpCheckTimes();
+    final checkTimes = viewModel.checkTimes;
 
     showModalBottomSheet(
       context: context,
@@ -204,6 +209,10 @@ class RgbPage extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Text(
+              'Check $checkTimes times',
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
             Text(
               _checkAnswer(question: question, answer: answer),
               style: Theme.of(context).textTheme.headline5,

@@ -29,7 +29,15 @@ class HsvViewModel extends AppChangeNotifier {
 
   ColorHSV get answer => _answer;
 
+  int checkTimes;
+
+  void countUpCheckTimes() {
+    checkTimes++;
+  }
+
   void changeColor() {
+    checkTimes = 0;
+
     _question = ColorHSV(
       h: _random.nextDouble() * 360,
       s: _random.nextDouble(),

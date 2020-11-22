@@ -29,7 +29,15 @@ class RgbViewModel extends AppChangeNotifier {
 
   ColorRGB get answer => _answer;
 
+  int checkTimes;
+
+  void countUpCheckTimes() {
+    checkTimes++;
+  }
+
   void changeColor() {
+    checkTimes = 0;
+
     _question = ColorRGB(
       r: _random.nextInt(256),
       g: _random.nextInt(256),
