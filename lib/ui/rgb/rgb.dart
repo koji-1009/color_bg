@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -138,7 +139,7 @@ class RgbPage extends StatelessWidget {
     @required int selectValue,
     @required Color selectColor,
     @required String title,
-    @required ValueSetter<double> setValue,
+    @required ValueSetter<int> setValue,
   }) =>
       Row(
         children: [
@@ -154,15 +155,36 @@ class RgbPage extends StatelessWidget {
               max: 255,
               label: selectValue.toString(),
               divisions: 256,
-              onChanged: setValue,
+              onChanged: (value) {
+                setValue(value.toInt());
+              },
             ),
           ),
-          SizedBox(
-            width: 40,
-            child: Text(
-              selectValue.toString(),
-              style: Theme.of(context).textTheme.headline6,
+          InkWell(
+            child: Padding(
+              padding: const EdgeInsets.all(4),
+              child: SizedBox(
+                width: 40,
+                child: Text(
+                  selectValue.toString(),
+                  style: Theme.of(context).textTheme.headline6,
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => CupertinoPicker.builder(
+                  scrollController:
+                      FixedExtentScrollController(initialItem: selectValue),
+                  itemExtent: 24,
+                  childCount: 256,
+                  itemBuilder: (context, index) => Text(index.toString()),
+                  onSelectedItemChanged: setValue,
+                ),
+              );
+            },
           ),
         ],
       );
