@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -174,19 +176,38 @@ class RgbPage extends StatelessWidget {
             ),
             onTap: () {
               showModalBottomSheet(
-                context: context,
-                builder: (context) => CupertinoPicker.builder(
-                  scrollController:
-                      FixedExtentScrollController(initialItem: selectValue),
-                  itemExtent: 24,
-                  childCount: 256,
-                  itemBuilder: (context, index) => Text(
-                    index.toString(),
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  onSelectedItemChanged: setValue,
-                ),
-              );
+                  context: context,
+                  builder: (context) => SizedBox(
+                        height: 120,
+                        child: Center(
+                          child: SizedBox(
+                            width: 120,
+                            child: TextField(
+                              textAlign: TextAlign.center,
+                              controller: TextEditingController(
+                                text: selectValue.toString(),
+                              ),
+                              autofocus: true,
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: 'Color $title',
+                              ),
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                  RegExp('^([012]?)([0-9]{0,2})'),
+                                )
+                              ],
+                              onSubmitted: (value) {
+                                final input = int.parse(value);
+                                setValue(min(input, 255));
+
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ),
+                        ),
+                      ));
             },
           ),
         ],
