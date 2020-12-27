@@ -1,3 +1,3 @@
-# Bolor BootCamp
+# Color BootCamp
 
 A coloring game by Flutter web.
