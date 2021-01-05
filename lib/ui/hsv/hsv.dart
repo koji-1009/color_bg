@@ -7,13 +7,23 @@ import '../../data/model/color_hsv.dart';
 import '../../util/ext/color_ext.dart';
 import 'hsv_view_model.dart';
 
-class HsvPage extends StatelessWidget {
+class HsvPage extends HookWidget {
   final _colorSize = 120.0;
 
   @override
   Widget build(BuildContext context) {
+    final color = useProvider(
+        hsvViewModelNotifierProvider.select((value) => value.question.color));
+    final h = useProvider(
+        hsvViewModelNotifierProvider.select((value) => value.answer.h));
+    final s = useProvider(
+        hsvViewModelNotifierProvider.select((value) => value.answer.s));
+    final v = useProvider(
+        hsvViewModelNotifierProvider.select((value) => value.answer.v));
+
     return Scaffold(
       bottomNavigationBar: _createBottomAppBar(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.check),
         label: const Text('Check answer'),
@@ -21,8 +31,6 @@ class HsvPage extends StatelessWidget {
           _showResultSheet(context);
         },
       ),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterDocked,
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -32,87 +40,52 @@ class HsvPage extends StatelessWidget {
             ),
             child: Column(
               children: [
-                HookBuilder(
-                  builder: (context) => Container(
-                    height: _colorSize,
-                    width: _colorSize,
-                    color: useProvider(hsvViewModelNotifierProvider)
-                        .question
-                        .color,
-                  ),
+                Container(
+                  height: _colorSize,
+                  width: _colorSize,
+                  color: color,
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
-                HookBuilder(
-                  builder: (context) {
-                    final answer = useProvider(hsvViewModelNotifierProvider
-                        .select((value) => value.answer));
-
-                    return _createSpinner(
-                      context: context,
-                      selectValue: answer.h,
-                      selectColor:
-                          HSVColor.fromAHSV(1, answer.h, 1, 1).toColor(),
-                      title: 'H',
-                      min: 0.0,
-                      max: 360,
-                      divisions: 3600,
-                      decimal: 1,
-                      setValue: (value) {
-                        context
-                            .read(hsvViewModelNotifierProvider)
-                            .update(h: value);
-                      },
-                    );
+                const SizedBox(height: 24),
+                _createSpinner(
+                  context: context,
+                  selectValue: h,
+                  selectColor: HSVColor.fromAHSV(1, h, 1, 1).toColor(),
+                  title: 'H',
+                  min: 0.0,
+                  max: 360,
+                  divisions: 3600,
+                  decimal: 1,
+                  setValue: (value) {
+                    context.read(hsvViewModelNotifierProvider).update(h: value);
                   },
                 ),
-                HookBuilder(
-                  builder: (context) {
-                    final answer = useProvider(hsvViewModelNotifierProvider
-                        .select((value) => value.answer));
-
-                    return _createSpinner(
-                      context: context,
-                      selectValue: answer.s,
-                      selectColor: HSVColor.fromColor(Colors.red)
-                          .withSaturation(answer.s)
-                          .toColor(),
-                      title: 'S',
-                      min: 0,
-                      max: 1,
-                      divisions: 100,
-                      decimal: 2,
-                      setValue: (value) {
-                        context
-                            .read(hsvViewModelNotifierProvider)
-                            .update(s: value);
-                      },
-                    );
+                _createSpinner(
+                  context: context,
+                  selectValue: s,
+                  selectColor: HSVColor.fromColor(Colors.red)
+                      .withSaturation(s)
+                      .toColor(),
+                  title: 'S',
+                  min: 0,
+                  max: 1,
+                  divisions: 100,
+                  decimal: 2,
+                  setValue: (value) {
+                    context.read(hsvViewModelNotifierProvider).update(s: value);
                   },
                 ),
-                HookBuilder(
-                  builder: (context) {
-                    final answer = useProvider(hsvViewModelNotifierProvider
-                        .select((value) => value.answer));
-
-                    return _createSpinner(
-                      context: context,
-                      selectValue: answer.v,
-                      selectColor: HSVColor.fromColor(Colors.white)
-                          .withValue(answer.v)
-                          .toColor(),
-                      title: 'V',
-                      min: 0,
-                      max: 1,
-                      divisions: 100,
-                      decimal: 2,
-                      setValue: (value) {
-                        context
-                            .read(hsvViewModelNotifierProvider)
-                            .update(v: value);
-                      },
-                    );
+                _createSpinner(
+                  context: context,
+                  selectValue: v,
+                  selectColor:
+                      HSVColor.fromColor(Colors.white).withValue(v).toColor(),
+                  title: 'V',
+                  min: 0,
+                  max: 1,
+                  divisions: 100,
+                  decimal: 2,
+                  setValue: (value) {
+                    context.read(hsvViewModelNotifierProvider).update(v: value);
                   },
                 ),
               ],
@@ -161,33 +134,34 @@ class HsvPage extends StatelessWidget {
     @required int decimal,
     @required String title,
     @required ValueSetter<double> setValue,
-  }) =>
-      Row(
-        children: [
-          Text(
-            title,
+  }) {
+    return Row(
+      children: [
+        Text(
+          title,
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        Expanded(
+          child: Slider(
+            value: selectValue,
+            activeColor: selectColor,
+            min: min,
+            max: max,
+            label: selectValue.toStringAsFixed(decimal),
+            divisions: divisions,
+            onChanged: setValue,
+          ),
+        ),
+        SizedBox(
+          width: 60,
+          child: Text(
+            selectValue.toStringAsFixed(decimal),
             style: Theme.of(context).textTheme.headline6,
           ),
-          Expanded(
-            child: Slider(
-              value: selectValue,
-              activeColor: selectColor,
-              min: min,
-              max: max,
-              label: selectValue.toStringAsFixed(decimal),
-              divisions: divisions,
-              onChanged: setValue,
-            ),
-          ),
-          SizedBox(
-            width: 60,
-            child: Text(
-              selectValue.toStringAsFixed(decimal),
-              style: Theme.of(context).textTheme.headline6,
-            ),
-          ),
-        ],
-      );
+        ),
+      ],
+    );
+  }
 
   void _showResultSheet(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.subtitle1;
@@ -214,9 +188,7 @@ class HsvPage extends StatelessWidget {
               _checkAnswer(question: question, answer: answer),
               style: Theme.of(context).textTheme.headline5,
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             Table(
               children: [
                 TableRow(
@@ -247,9 +219,7 @@ class HsvPage extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 32,
-            ),
+            const SizedBox(height: 32),
             RaisedButton(
               child: const Text('next color'),
               onPressed: () {
@@ -280,9 +250,7 @@ class HsvPage extends StatelessWidget {
               'V: ${question.v.toStringAsFixed(2)}',
               style: textStyle,
             ),
-            const SizedBox(
-              height: 32,
-            ),
+            const SizedBox(height: 32),
             RaisedButton(
               child: const Text('next color'),
               onPressed: () {
