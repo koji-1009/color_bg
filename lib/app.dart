@@ -20,11 +20,11 @@ class App extends HookWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: snapshot.data ?? ThemeMode.system,
-      home: HomePage(),
+      home: const HomePage(),
       routes: {
-        Constants.pageHome: (context) => HomePage(),
-        Constants.pageRgb: (context) => RgbPage(),
-        Constants.pageHsv: (context) => HsvPage(),
+        Constants.pageHome: (_) => const HomePage(),
+        Constants.pageRgb: (_) => const RgbPage(),
+        Constants.pageHsv: (_) => const HsvPage(),
       },
     );
   }

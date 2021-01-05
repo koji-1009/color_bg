@@ -10,6 +10,8 @@ import '../../util/ext/color_ext.dart';
 import 'rgb_view_model.dart';
 
 class RgbPage extends HookWidget {
+  const RgbPage({Key key}) : super(key: key);
+
   final _colorSize = 120.0;
 
   @override
