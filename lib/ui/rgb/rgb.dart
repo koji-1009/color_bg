@@ -254,7 +254,7 @@ class RgbPage extends HookWidget {
               ],
             ),
             const SizedBox(height: 32),
-            RaisedButton(
+            ElevatedButton(
               child: const Text('next color'),
               onPressed: () {
                 _nextColor(context);
@@ -283,7 +283,7 @@ class RgbPage extends HookWidget {
               style: textStyle,
             ),
             const SizedBox(height: 32),
-            RaisedButton(
+            ElevatedButton(
               child: const Text('next color'),
               onPressed: () {
                 _nextColor(context);

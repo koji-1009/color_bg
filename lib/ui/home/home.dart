@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(
                     context,
@@ -59,7 +59,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 16,
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(
                     context,

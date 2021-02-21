@@ -222,7 +222,7 @@ class HsvPage extends HookWidget {
               ],
             ),
             const SizedBox(height: 32),
-            RaisedButton(
+            ElevatedButton(
               child: const Text('next color'),
               onPressed: () {
                 _nextColor(context);
@@ -253,7 +253,7 @@ class HsvPage extends HookWidget {
               style: textStyle,
             ),
             const SizedBox(height: 32),
-            RaisedButton(
+            ElevatedButton(
               child: const Text('next color'),
               onPressed: () {
                 _nextColor(context);
