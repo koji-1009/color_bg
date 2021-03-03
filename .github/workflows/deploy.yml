@@ -11,12 +11,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install flutter (beta channel)
+    - name: Install flutter
       uses: subosito/flutter-action@v1
       with:
-        channel: 'beta'
-    - name: Enable Flutter for Web
-      run: flutter config --enable-web
+        channel: 'stable'
     - name: Build Flutter for Web
       run: flutter build web
     - name: Create dir
