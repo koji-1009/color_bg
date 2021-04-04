@@ -21,15 +21,15 @@ class RgbViewModel extends AppChangeNotifier {
 
   final _random = Random();
 
-  ColorRGB _question;
+  late ColorRGB _question;
 
   ColorRGB get question => _question;
 
-  ColorRGB _answer;
+  late ColorRGB _answer;
 
   ColorRGB get answer => _answer;
 
-  int checkTimes;
+  int checkTimes = 0;
 
   void countUpCheckTimes() {
     checkTimes++;
@@ -48,9 +48,9 @@ class RgbViewModel extends AppChangeNotifier {
   }
 
   void update({
-    int r,
-    int g,
-    int b,
+    int? r,
+    int? g,
+    int? b,
   }) {
     _answer = _answer.copyWith(
       r: r ?? _answer.r,

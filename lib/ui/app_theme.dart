@@ -24,25 +24,25 @@ class AppTheme extends AppChangeNotifier {
 
   final ProviderReference _ref;
 
-  ThemeRepository _repository;
+  ThemeRepository? _repository;
 
-  ThemeMode _setting;
+  ThemeMode? _setting;
 
-  ThemeMode get setting => _setting;
+  ThemeMode? get setting => _setting;
 
   Future<ThemeMode> get themeMode async {
     if (setting == null) {
       _repository ??= await _ref.read(themeRepositoryProvider.future);
-      _setting = _repository.loadThemeMode() ?? _defaultThemeMode;
+      _setting = _repository?.loadThemeMode() ?? _defaultThemeMode;
     }
-    return setting;
+    return setting!;
   }
 
   Future<void> _loadLightTheme() async {
     _repository ??= await _ref.read(themeRepositoryProvider.future);
     _setting = ThemeMode.light;
-    await _repository
-        .saveThemeMode(setting)
+    await _repository!
+        .saveThemeMode(setting!)
         .catchError((dynamic error) => doOnError(AppError(error)));
     notifyListeners();
   }
@@ -50,8 +50,8 @@ class AppTheme extends AppChangeNotifier {
   Future<void> _loadDarkTheme() async {
     _repository ??= await _ref.read(themeRepositoryProvider.future);
     _setting = ThemeMode.dark;
-    await _repository
-        .saveThemeMode(setting)
+    await _repository!
+        .saveThemeMode(setting!)
         .catchError((dynamic error) => doOnError(AppError(error)));
     notifyListeners();
   }
@@ -59,8 +59,8 @@ class AppTheme extends AppChangeNotifier {
   Future<void> _loadSystemTheme() async {
     _repository ??= await _ref.read(themeRepositoryProvider.future);
     _setting = ThemeMode.system;
-    await _repository
-        .saveThemeMode(setting)
+    await _repository!
+        .saveThemeMode(setting!)
         .catchError((dynamic error) => doOnError(AppError(error)));
     notifyListeners();
   }

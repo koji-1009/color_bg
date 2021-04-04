@@ -8,7 +8,7 @@ import '../../util/ext/color_ext.dart';
 import 'hsv_view_model.dart';
 
 class HsvPage extends HookWidget {
-  const HsvPage({Key key}) : super(key: key);
+  const HsvPage({Key? key}) : super(key: key);
 
   final _colorSize = 120.0;
 

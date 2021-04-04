@@ -12,13 +12,20 @@ class ThemeDataSourceImpl extends ThemeDataSource {
   final SharedPreferences _prefs;
 
   @override
-  ThemeMode loadThemeMode() {
-    return EnumToString.fromString(
-        ThemeMode.values, _prefs.getString(keyThemeMode));
+  ThemeMode? loadThemeMode() {
+    final key = _prefs.getString(keyThemeMode);
+    if (key == null) {
+      return null;
+    }
+
+    return EnumToString.fromString(ThemeMode.values, key);
   }
 
   @override
   Future<void> saveThemeMode(ThemeMode theme) {
-    return _prefs.setString(keyThemeMode, EnumToString.convertToString(theme));
+    return _prefs.setString(
+      keyThemeMode,
+      EnumToString.convertToString(theme),
+    );
   }
 }

@@ -21,15 +21,15 @@ class HsvViewModel extends AppChangeNotifier {
 
   final _random = Random();
 
-  ColorHSV _question;
+  late ColorHSV _question;
 
   ColorHSV get question => _question;
 
-  ColorHSV _answer;
+  late ColorHSV _answer;
 
   ColorHSV get answer => _answer;
 
-  int checkTimes;
+  int checkTimes = 0;
 
   void countUpCheckTimes() {
     checkTimes++;
@@ -48,9 +48,9 @@ class HsvViewModel extends AppChangeNotifier {
   }
 
   void update({
-    double h,
-    double s,
-    double v,
+    double? h,
+    double? s,
+    double? v,
   }) {
     _answer = _answer.copyWith(
       h: h ?? _answer.h,

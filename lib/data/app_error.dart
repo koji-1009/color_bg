@@ -15,6 +15,6 @@ class AppError {
     }
   }
 
-  String message;
-  AppErrorType type;
+  late String message;
+  late AppErrorType type;
 }

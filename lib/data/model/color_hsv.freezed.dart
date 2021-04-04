@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'color_hsv.dart';
 
@@ -9,12 +9,14 @@ part of 'color_hsv.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$ColorHSVTearOff {
   const _$ColorHSVTearOff();
 
-// ignore: unused_element
-  _ColorHSV call({double h, double s, double v}) {
+  _ColorHSV call({required double h, required double s, required double v}) {
     return _ColorHSV(
       h: h,
       s: s,
@@ -24,25 +26,23 @@ class _$ColorHSVTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ColorHSV = _$ColorHSVTearOff();
 
 /// @nodoc
 mixin _$ColorHSV {
-  double get h;
+  double get h => throw _privateConstructorUsedError;
+  double get s => throw _privateConstructorUsedError;
+  double get v => throw _privateConstructorUsedError;
 
-  double get s;
-
-  double get v;
-
-  $ColorHSVCopyWith<ColorHSV> get copyWith;
+  @JsonKey(ignore: true)
+  $ColorHSVCopyWith<ColorHSV> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ColorHSVCopyWith<$Res> {
   factory $ColorHSVCopyWith(ColorHSV value, $Res Function(ColorHSV) then) =
       _$ColorHSVCopyWithImpl<$Res>;
-
   $Res call({double h, double s, double v});
 }
 
@@ -51,20 +51,28 @@ class _$ColorHSVCopyWithImpl<$Res> implements $ColorHSVCopyWith<$Res> {
   _$ColorHSVCopyWithImpl(this._value, this._then);
 
   final ColorHSV _value;
-
   // ignore: unused_field
   final $Res Function(ColorHSV) _then;
 
   @override
   $Res call({
-    Object h = freezed,
-    Object s = freezed,
-    Object v = freezed,
+    Object? h = freezed,
+    Object? s = freezed,
+    Object? v = freezed,
   }) {
     return _then(_value.copyWith(
-      h: h == freezed ? _value.h : h as double,
-      s: s == freezed ? _value.s : s as double,
-      v: v == freezed ? _value.v : v as double,
+      h: h == freezed
+          ? _value.h
+          : h // ignore: cast_nullable_to_non_nullable
+              as double,
+      s: s == freezed
+          ? _value.s
+          : s // ignore: cast_nullable_to_non_nullable
+              as double,
+      v: v == freezed
+          ? _value.v
+          : v // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -73,7 +81,6 @@ class _$ColorHSVCopyWithImpl<$Res> implements $ColorHSVCopyWith<$Res> {
 abstract class _$ColorHSVCopyWith<$Res> implements $ColorHSVCopyWith<$Res> {
   factory _$ColorHSVCopyWith(_ColorHSV value, $Res Function(_ColorHSV) then) =
       __$ColorHSVCopyWithImpl<$Res>;
-
   @override
   $Res call({double h, double s, double v});
 }
@@ -89,21 +96,30 @@ class __$ColorHSVCopyWithImpl<$Res> extends _$ColorHSVCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object h = freezed,
-    Object s = freezed,
-    Object v = freezed,
+    Object? h = freezed,
+    Object? s = freezed,
+    Object? v = freezed,
   }) {
     return _then(_ColorHSV(
-      h: h == freezed ? _value.h : h as double,
-      s: s == freezed ? _value.s : s as double,
-      v: v == freezed ? _value.v : v as double,
+      h: h == freezed
+          ? _value.h
+          : h // ignore: cast_nullable_to_non_nullable
+              as double,
+      s: s == freezed
+          ? _value.s
+          : s // ignore: cast_nullable_to_non_nullable
+              as double,
+      v: v == freezed
+          ? _value.v
+          : v // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
 
 /// @nodoc
-class _$_ColorHSV implements _ColorHSV {
-  _$_ColorHSV({this.h, this.s, this.v});
+class _$_ColorHSV with DiagnosticableTreeMixin implements _ColorHSV {
+  _$_ColorHSV({required this.h, required this.s, required this.v});
 
   @override
   final double h;
@@ -113,8 +129,18 @@ class _$_ColorHSV implements _ColorHSV {
   final double v;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ColorHSV(h: $h, s: $s, v: $v)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ColorHSV'))
+      ..add(DiagnosticsProperty('h', h))
+      ..add(DiagnosticsProperty('s', s))
+      ..add(DiagnosticsProperty('v', v));
   }
 
   @override
@@ -136,23 +162,24 @@ class _$_ColorHSV implements _ColorHSV {
       const DeepCollectionEquality().hash(s) ^
       const DeepCollectionEquality().hash(v);
 
+  @JsonKey(ignore: true)
   @override
   _$ColorHSVCopyWith<_ColorHSV> get copyWith =>
       __$ColorHSVCopyWithImpl<_ColorHSV>(this, _$identity);
 }
 
 abstract class _ColorHSV implements ColorHSV {
-  factory _ColorHSV({double h, double s, double v}) = _$_ColorHSV;
+  factory _ColorHSV({required double h, required double s, required double v}) =
+      _$_ColorHSV;
 
   @override
-  double get h;
-
+  double get h => throw _privateConstructorUsedError;
   @override
-  double get s;
-
+  double get s => throw _privateConstructorUsedError;
   @override
-  double get v;
-
+  double get v => throw _privateConstructorUsedError;
   @override
-  _$ColorHSVCopyWith<_ColorHSV> get copyWith;
+  @JsonKey(ignore: true)
+  _$ColorHSVCopyWith<_ColorHSV> get copyWith =>
+      throw _privateConstructorUsedError;
 }

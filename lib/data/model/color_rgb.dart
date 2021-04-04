@@ -1,12 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'color_rgb.freezed.dart';
 
 @freezed
-abstract class ColorRGB with _$ColorRGB {
+class ColorRGB with _$ColorRGB {
   factory ColorRGB({
-    int r,
-    int g,
-    int b,
+    required int r,
+    required int g,
+    required int b,
   }) = _ColorRGB;
 }

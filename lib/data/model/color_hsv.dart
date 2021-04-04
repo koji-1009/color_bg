@@ -1,12 +1,13 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
 part 'color_hsv.freezed.dart';
 
 @freezed
-abstract class ColorHSV with _$ColorHSV {
+class ColorHSV with _$ColorHSV {
   factory ColorHSV({
-    double h,
-    double s,
-    double v,
+    required double h,
+    required double s,
+    required double v,
   }) = _ColorHSV;
 }
