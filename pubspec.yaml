@@ -13,10 +13,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_hooks: ^0.16.0
-  hooks_riverpod: ^0.12.4
+  hooks_riverpod: ^0.13.1+1
 
-  shared_preferences: ^0.5.12+4
-  enum_to_string: ^1.0.14
+  shared_preferences: ^2.0.5
+  enum_to_string: ^2.0.1
 
   freezed_annotation:
 
