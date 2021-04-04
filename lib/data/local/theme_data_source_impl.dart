@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'theme_data_source.dart';
 
 class ThemeDataSourceImpl extends ThemeDataSource {
-  ThemeDataSourceImpl({@required SharedPreferences prefs}) : _prefs = prefs;
+  ThemeDataSourceImpl({required SharedPreferences prefs}) : _prefs = prefs;
 
   static const String keyThemeMode = 'theme_mode';
 

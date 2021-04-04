@@ -120,11 +120,11 @@ class RgbPage extends HookWidget {
   }
 
   Widget _createSpinner({
-    @required BuildContext context,
-    @required int selectValue,
-    @required Color selectColor,
-    @required String title,
-    @required ValueSetter<int> setValue,
+    required BuildContext context,
+    required int selectValue,
+    required Color selectColor,
+    required String title,
+    required ValueSetter<int> setValue,
   }) {
     return Row(
       children: [
@@ -301,8 +301,8 @@ class RgbPage extends HookWidget {
   }
 
   String _checkAnswer({
-    @required ColorRGB question,
-    @required ColorRGB answer,
+    required ColorRGB question,
+    required ColorRGB answer,
   }) {
     final result = (question.r - answer.r).abs() +
         (question.g - answer.g).abs() +

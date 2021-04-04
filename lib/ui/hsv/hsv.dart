@@ -127,15 +127,15 @@ class HsvPage extends HookWidget {
   }
 
   Widget _createSpinner({
-    @required BuildContext context,
-    @required double selectValue,
-    @required Color selectColor,
-    @required double min,
-    @required double max,
-    @required int divisions,
-    @required int decimal,
-    @required String title,
-    @required ValueSetter<double> setValue,
+    required BuildContext context,
+    required double selectValue,
+    required Color selectColor,
+    required double min,
+    required double max,
+    required int divisions,
+    required int decimal,
+    required String title,
+    required ValueSetter<double> setValue,
   }) {
     return Row(
       children: [
@@ -271,8 +271,8 @@ class HsvPage extends HookWidget {
   }
 
   String _checkAnswer({
-    @required ColorHSV question,
-    @required ColorHSV answer,
+    required ColorHSV question,
+    required ColorHSV answer,
   }) {
     final result = (question.h - answer.h).abs() +
         (question.s * 100 - answer.s * 100).abs() +
