@@ -118,6 +118,7 @@ class __$ColorRGBCopyWithImpl<$Res> extends _$ColorRGBCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$_ColorRGB with DiagnosticableTreeMixin implements _ColorRGB {
   _$_ColorRGB({required this.r, required this.g, required this.b});
 

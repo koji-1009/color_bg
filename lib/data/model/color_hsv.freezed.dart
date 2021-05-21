@@ -118,6 +118,7 @@ class __$ColorHSVCopyWithImpl<$Res> extends _$ColorHSVCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$_ColorHSV with DiagnosticableTreeMixin implements _ColorHSV {
   _$_ColorHSV({required this.h, required this.s, required this.v});
 

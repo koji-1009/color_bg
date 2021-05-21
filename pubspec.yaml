@@ -6,14 +6,14 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
-  flutter: ">=2.0.0"
+  sdk: ">=2.13.0 <3.0.0"
+  flutter: ">=2.2.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_hooks: ^0.16.0
-  hooks_riverpod: ^0.13.1+1
+  flutter_hooks: ^0.17.0
+  hooks_riverpod: ^0.14.0+4
 
   shared_preferences: ^2.0.5
   enum_to_string: ^2.0.1
