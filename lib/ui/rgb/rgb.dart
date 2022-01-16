@@ -2,37 +2,48 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/model/color_rgb.dart';
 import '../../util/ext/color_ext.dart';
 import 'rgb_view_model.dart';
 
-class RgbPage extends HookWidget {
+class RgbPage extends HookConsumerWidget {
   const RgbPage({Key? key}) : super(key: key);
 
   final _colorSize = 120.0;
 
   @override
-  Widget build(BuildContext context) {
-    final color = useProvider(
-        rgbViewModelNotifierProvider.select((value) => value.question.color));
-    final r = useProvider(
-        rgbViewModelNotifierProvider.select((value) => value.answer.r));
-    final g = useProvider(
-        rgbViewModelNotifierProvider.select((value) => value.answer.g));
-    final b = useProvider(
-        rgbViewModelNotifierProvider.select((value) => value.answer.b));
+  Widget build(BuildContext context, WidgetRef ref) {
+    final color = ref.watch(
+      rgbViewModelNotifierProvider.select<Color>(
+        (value) => value.question.color,
+      ),
+    );
+    final r = ref.watch(
+      rgbViewModelNotifierProvider.select<int>(
+        (value) => value.answer.r,
+      ),
+    );
+    final g = ref.watch(
+      rgbViewModelNotifierProvider.select<int>(
+        (value) => value.answer.g,
+      ),
+    );
+    final b = ref.watch(
+      rgbViewModelNotifierProvider.select<int>(
+        (value) => value.answer.b,
+      ),
+    );
 
     return Scaffold(
-      bottomNavigationBar: _createBottomAppBar(context),
+      bottomNavigationBar: _createBottomAppBar(ref, context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.check),
         label: const Text('Check answer'),
         onPressed: () {
-          _showResultSheet(context);
+          _showResultSheet(ref, context);
         },
       ),
       body: SafeArea(
@@ -56,7 +67,7 @@ class RgbPage extends HookWidget {
                   selectColor: Color.fromARGB(255, r, 0, 0),
                   title: 'R',
                   setValue: (value) {
-                    context
+                    ref
                         .read(rgbViewModelNotifierProvider)
                         .update(r: value.round());
                   },
@@ -67,7 +78,7 @@ class RgbPage extends HookWidget {
                   selectColor: Color.fromARGB(255, 0, g, 0),
                   title: 'G',
                   setValue: (value) {
-                    context
+                    ref
                         .read(rgbViewModelNotifierProvider)
                         .update(g: value.round());
                   },
@@ -78,7 +89,7 @@ class RgbPage extends HookWidget {
                   selectColor: Color.fromARGB(255, 0, 0, b),
                   title: 'B',
                   setValue: (value) {
-                    context
+                    ref
                         .read(rgbViewModelNotifierProvider)
                         .update(b: value.round());
                   },
@@ -91,7 +102,7 @@ class RgbPage extends HookWidget {
     );
   }
 
-  Widget _createBottomAppBar(BuildContext context) {
+  Widget _createBottomAppBar(WidgetRef ref, BuildContext context) {
     return BottomAppBar(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -109,7 +120,7 @@ class RgbPage extends HookWidget {
             IconButton(
               icon: const Icon(Icons.flag_outlined),
               onPressed: () {
-                _showGiveUpSheet(context);
+                _showGiveUpSheet(ref, context);
               },
               tooltip: 'give up',
             ),
@@ -197,10 +208,10 @@ class RgbPage extends HookWidget {
     );
   }
 
-  void _showResultSheet(BuildContext context) {
+  void _showResultSheet(WidgetRef ref, BuildContext context) {
     final textStyle = Theme.of(context).textTheme.subtitle1;
 
-    final viewModel = context.read(rgbViewModelNotifierProvider);
+    final viewModel = ref.read(rgbViewModelNotifierProvider);
     final question = viewModel.question;
     final answer = viewModel.answer;
 
@@ -257,7 +268,7 @@ class RgbPage extends HookWidget {
             ElevatedButton(
               child: const Text('next color'),
               onPressed: () {
-                _nextColor(context);
+                _nextColor(ref, context);
                 Navigator.of(context).pop();
               },
             ),
@@ -267,9 +278,9 @@ class RgbPage extends HookWidget {
     );
   }
 
-  void _showGiveUpSheet(BuildContext context) {
+  void _showGiveUpSheet(WidgetRef ref, BuildContext context) {
     final textStyle = Theme.of(context).textTheme.headline6;
-    final question = context.read(rgbViewModelNotifierProvider).question;
+    final question = ref.read(rgbViewModelNotifierProvider).question;
 
     showModalBottomSheet(
       context: context,
@@ -286,7 +297,7 @@ class RgbPage extends HookWidget {
             ElevatedButton(
               child: const Text('next color'),
               onPressed: () {
-                _nextColor(context);
+                _nextColor(ref, context);
                 Navigator.of(context).pop();
               },
             ),
@@ -296,8 +307,8 @@ class RgbPage extends HookWidget {
     );
   }
 
-  void _nextColor(BuildContext context) {
-    context.read(rgbViewModelNotifierProvider).changeColor();
+  void _nextColor(WidgetRef ref, BuildContext context) {
+    ref.read(rgbViewModelNotifierProvider).changeColor();
   }
 
   String _checkAnswer({

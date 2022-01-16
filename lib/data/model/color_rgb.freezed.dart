@@ -1,5 +1,7 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'color_rgb.dart';
 
@@ -147,21 +149,19 @@ class _$_ColorRGB with DiagnosticableTreeMixin implements _ColorRGB {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ColorRGB &&
-            (identical(other.r, r) ||
-                const DeepCollectionEquality().equals(other.r, r)) &&
-            (identical(other.g, g) ||
-                const DeepCollectionEquality().equals(other.g, g)) &&
-            (identical(other.b, b) ||
-                const DeepCollectionEquality().equals(other.b, b)));
+        (other.runtimeType == runtimeType &&
+            other is _ColorRGB &&
+            const DeepCollectionEquality().equals(other.r, r) &&
+            const DeepCollectionEquality().equals(other.g, g) &&
+            const DeepCollectionEquality().equals(other.b, b));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(r) ^
-      const DeepCollectionEquality().hash(g) ^
-      const DeepCollectionEquality().hash(b);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(r),
+      const DeepCollectionEquality().hash(g),
+      const DeepCollectionEquality().hash(b));
 
   @JsonKey(ignore: true)
   @override
@@ -174,11 +174,11 @@ abstract class _ColorRGB implements ColorRGB {
       _$_ColorRGB;
 
   @override
-  int get r => throw _privateConstructorUsedError;
+  int get r;
   @override
-  int get g => throw _privateConstructorUsedError;
+  int get g;
   @override
-  int get b => throw _privateConstructorUsedError;
+  int get b;
   @override
   @JsonKey(ignore: true)
   _$ColorRGBCopyWith<_ColorRGB> get copyWith =>

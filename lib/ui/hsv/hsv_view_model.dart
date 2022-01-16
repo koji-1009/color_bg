@@ -5,11 +5,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../data/model/color_hsv.dart';
 import '../change_notifier_with_error_handle.dart';
 
-final hsvViewModelNotifierProvider =
-    ChangeNotifierProvider((ref) => HsvViewModel(ref));
+final hsvViewModelNotifierProvider = ChangeNotifierProvider<HsvViewModel>(
+  HsvViewModel.new,
+);
 
 class HsvViewModel extends AppChangeNotifier {
-  HsvViewModel(ProviderReference ref) : super(ref) {
+  HsvViewModel(Ref ref) : super(ref) {
     _answer = ColorHSV(
       h: 0.0,
       s: 0.0,

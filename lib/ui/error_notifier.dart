@@ -3,7 +3,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../data/app_error.dart';
 
-final errorNotifierProvider = ChangeNotifierProvider((ref) => ErrorNotifier());
+final errorNotifierProvider = ChangeNotifierProvider<ErrorNotifier>(
+  (ref) => ErrorNotifier(),
+);
 
 class ErrorNotifier extends ChangeNotifier {
   AppError? _error;

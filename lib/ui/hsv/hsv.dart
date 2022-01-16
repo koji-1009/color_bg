@@ -1,36 +1,40 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/model/color_hsv.dart';
 import '../../util/ext/color_ext.dart';
 import 'hsv_view_model.dart';
 
-class HsvPage extends HookWidget {
+class HsvPage extends HookConsumerWidget {
   const HsvPage({Key? key}) : super(key: key);
 
   final _colorSize = 120.0;
 
   @override
-  Widget build(BuildContext context) {
-    final color = useProvider(
-        hsvViewModelNotifierProvider.select((value) => value.question.color));
-    final h = useProvider(
-        hsvViewModelNotifierProvider.select((value) => value.answer.h));
-    final s = useProvider(
-        hsvViewModelNotifierProvider.select((value) => value.answer.s));
-    final v = useProvider(
-        hsvViewModelNotifierProvider.select((value) => value.answer.v));
+  Widget build(BuildContext context, WidgetRef ref) {
+    final color = ref.watch(
+      hsvViewModelNotifierProvider.select<Color>(
+        (value) => value.question.color,
+      ),
+    );
+    final h = ref.watch(
+      hsvViewModelNotifierProvider.select<double>((value) => value.answer.h),
+    );
+    final s = ref.watch(
+      hsvViewModelNotifierProvider.select<double>((value) => value.answer.s),
+    );
+    final v = ref.watch(
+      hsvViewModelNotifierProvider.select<double>((value) => value.answer.v),
+    );
 
     return Scaffold(
-      bottomNavigationBar: _createBottomAppBar(context),
+      bottomNavigationBar: _createBottomAppBar(ref, context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.check),
         label: const Text('Check answer'),
         onPressed: () {
-          _showResultSheet(context);
+          _showResultSheet(ref, context);
         },
       ),
       body: SafeArea(
@@ -58,7 +62,7 @@ class HsvPage extends HookWidget {
                   divisions: 3600,
                   decimal: 1,
                   setValue: (value) {
-                    context.read(hsvViewModelNotifierProvider).update(h: value);
+                    ref.read(hsvViewModelNotifierProvider).update(h: value);
                   },
                 ),
                 _createSpinner(
@@ -73,7 +77,7 @@ class HsvPage extends HookWidget {
                   divisions: 100,
                   decimal: 2,
                   setValue: (value) {
-                    context.read(hsvViewModelNotifierProvider).update(s: value);
+                    ref.read(hsvViewModelNotifierProvider).update(s: value);
                   },
                 ),
                 _createSpinner(
@@ -87,7 +91,7 @@ class HsvPage extends HookWidget {
                   divisions: 100,
                   decimal: 2,
                   setValue: (value) {
-                    context.read(hsvViewModelNotifierProvider).update(v: value);
+                    ref.read(hsvViewModelNotifierProvider).update(v: value);
                   },
                 ),
               ],
@@ -98,7 +102,7 @@ class HsvPage extends HookWidget {
     );
   }
 
-  Widget _createBottomAppBar(BuildContext context) {
+  Widget _createBottomAppBar(WidgetRef ref, BuildContext context) {
     return BottomAppBar(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -116,7 +120,7 @@ class HsvPage extends HookWidget {
             IconButton(
               icon: const Icon(Icons.flag_outlined),
               onPressed: () {
-                _showGiveUpSheet(context);
+                _showGiveUpSheet(ref, context);
               },
               tooltip: 'give up',
             ),
@@ -165,10 +169,10 @@ class HsvPage extends HookWidget {
     );
   }
 
-  void _showResultSheet(BuildContext context) {
+  void _showResultSheet(WidgetRef ref, BuildContext context) {
     final textStyle = Theme.of(context).textTheme.subtitle1;
 
-    final viewModel = context.read(hsvViewModelNotifierProvider);
+    final viewModel = ref.read(hsvViewModelNotifierProvider);
     final question = viewModel.question;
     final answer = viewModel.answer;
 
@@ -225,7 +229,7 @@ class HsvPage extends HookWidget {
             ElevatedButton(
               child: const Text('next color'),
               onPressed: () {
-                _nextColor(context);
+                _nextColor(ref, context);
                 Navigator.of(context).pop();
               },
             ),
@@ -235,9 +239,9 @@ class HsvPage extends HookWidget {
     );
   }
 
-  void _showGiveUpSheet(BuildContext context) {
+  void _showGiveUpSheet(WidgetRef ref, BuildContext context) {
     final textStyle = Theme.of(context).textTheme.headline6;
-    final question = context.read(hsvViewModelNotifierProvider).question;
+    final question = ref.read(hsvViewModelNotifierProvider).question;
 
     showModalBottomSheet(
       context: context,
@@ -256,7 +260,7 @@ class HsvPage extends HookWidget {
             ElevatedButton(
               child: const Text('next color'),
               onPressed: () {
-                _nextColor(context);
+                _nextColor(ref, context);
                 Navigator.of(context).pop();
               },
             ),
@@ -266,8 +270,8 @@ class HsvPage extends HookWidget {
     );
   }
 
-  void _nextColor(BuildContext context) {
-    context.read(hsvViewModelNotifierProvider).changeColor();
+  void _nextColor(WidgetRef ref, BuildContext context) {
+    ref.read(hsvViewModelNotifierProvider).changeColor();
   }
 
   String _checkAnswer({

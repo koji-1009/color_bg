@@ -6,23 +6,26 @@ import '../data/provider/theme_repository_provider.dart';
 import '../data/repository/theme_repository.dart';
 import 'change_notifier_with_error_handle.dart';
 
-final appThemeNotifierProvider =
-    ChangeNotifierProvider<AppTheme>((ref) => AppTheme(ref));
+final appThemeNotifierProvider = ChangeNotifierProvider<AppTheme>(
+  AppTheme.new,
+);
 
-ThemeData get lightTheme =>
-    ThemeData.from(colorScheme: const ColorScheme.light());
+ThemeData get lightTheme => ThemeData.from(
+      colorScheme: const ColorScheme.light(),
+    );
 
-ThemeData get darkTheme =>
-    ThemeData.from(colorScheme: const ColorScheme.dark());
+ThemeData get darkTheme => ThemeData.from(
+      colorScheme: const ColorScheme.dark(),
+    );
 
 class AppTheme extends AppChangeNotifier {
-  AppTheme(ProviderReference ref)
+  AppTheme(Ref ref)
       : _ref = ref,
         super(ref);
 
   static const _defaultThemeMode = ThemeMode.light;
 
-  final ProviderReference _ref;
+  final Ref _ref;
 
   ThemeRepository? _repository;
 
@@ -38,7 +41,7 @@ class AppTheme extends AppChangeNotifier {
     return setting!;
   }
 
-  Future<void> _loadLightTheme() async {
+  Future<void> _loadLightTheme(WidgetRef ref) async {
     _repository ??= await _ref.read(themeRepositoryProvider.future);
     _setting = ThemeMode.light;
     await _repository!
@@ -47,7 +50,7 @@ class AppTheme extends AppChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> _loadDarkTheme() async {
+  Future<void> _loadDarkTheme(WidgetRef ref) async {
     _repository ??= await _ref.read(themeRepositoryProvider.future);
     _setting = ThemeMode.dark;
     await _repository!
@@ -56,7 +59,7 @@ class AppTheme extends AppChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> _loadSystemTheme() async {
+  Future<void> _loadSystemTheme(WidgetRef ref) async {
     _repository ??= await _ref.read(themeRepositoryProvider.future);
     _setting = ThemeMode.system;
     await _repository!
@@ -65,16 +68,16 @@ class AppTheme extends AppChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateTheme(ThemeMode setting) async {
+  Future<void> updateTheme(WidgetRef ref, ThemeMode setting) async {
     switch (setting) {
       case ThemeMode.light:
-        await _loadLightTheme();
+        await _loadLightTheme(ref);
         break;
       case ThemeMode.dark:
-        await _loadDarkTheme();
+        await _loadDarkTheme(ref);
         break;
       case ThemeMode.system:
-        await _loadSystemTheme();
+        await _loadSystemTheme(ref);
         break;
     }
   }

@@ -5,7 +5,7 @@ import '../data/app_error.dart';
 import 'error_notifier.dart';
 
 class AppChangeNotifier extends ChangeNotifier {
-  AppChangeNotifier(ProviderReference ref)
+  AppChangeNotifier(Ref ref)
       : _errorNotifier = ref.read(errorNotifierProvider);
 
   final ErrorNotifier _errorNotifier;

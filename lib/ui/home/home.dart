@@ -4,11 +4,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../constants.dart';
 import '../app_theme.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         child: Padding(
@@ -19,8 +19,8 @@ class HomePage extends StatelessWidget {
             children: <Widget>[
               PopupMenuButton<ThemeMode>(
                 onSelected: (result) async {
-                  final appTheme = context.read(appThemeNotifierProvider);
-                  await appTheme.updateTheme(result);
+                  final appTheme = ref.read(appThemeNotifierProvider);
+                  await appTheme.updateTheme(ref, result);
                 },
                 itemBuilder: (context) => <PopupMenuEntry<ThemeMode>>[
                   const PopupMenuItem<ThemeMode>(

@@ -1,5 +1,7 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'color_hsv.dart';
 
@@ -147,21 +149,19 @@ class _$_ColorHSV with DiagnosticableTreeMixin implements _ColorHSV {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ColorHSV &&
-            (identical(other.h, h) ||
-                const DeepCollectionEquality().equals(other.h, h)) &&
-            (identical(other.s, s) ||
-                const DeepCollectionEquality().equals(other.s, s)) &&
-            (identical(other.v, v) ||
-                const DeepCollectionEquality().equals(other.v, v)));
+        (other.runtimeType == runtimeType &&
+            other is _ColorHSV &&
+            const DeepCollectionEquality().equals(other.h, h) &&
+            const DeepCollectionEquality().equals(other.s, s) &&
+            const DeepCollectionEquality().equals(other.v, v));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(h) ^
-      const DeepCollectionEquality().hash(s) ^
-      const DeepCollectionEquality().hash(v);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(h),
+      const DeepCollectionEquality().hash(s),
+      const DeepCollectionEquality().hash(v));
 
   @JsonKey(ignore: true)
   @override
@@ -174,11 +174,11 @@ abstract class _ColorHSV implements ColorHSV {
       _$_ColorHSV;
 
   @override
-  double get h => throw _privateConstructorUsedError;
+  double get h;
   @override
-  double get s => throw _privateConstructorUsedError;
+  double get s;
   @override
-  double get v => throw _privateConstructorUsedError;
+  double get v;
   @override
   @JsonKey(ignore: true)
   _$ColorHSVCopyWith<_ColorHSV> get copyWith =>

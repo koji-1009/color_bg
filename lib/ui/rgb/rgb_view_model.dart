@@ -5,11 +5,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../data/model/color_rgb.dart';
 import '../change_notifier_with_error_handle.dart';
 
-final rgbViewModelNotifierProvider =
-    ChangeNotifierProvider((ref) => RgbViewModel(ref));
+final rgbViewModelNotifierProvider = ChangeNotifierProvider<RgbViewModel>(
+  RgbViewModel.new,
+);
 
 class RgbViewModel extends AppChangeNotifier {
-  RgbViewModel(ProviderReference ref) : super(ref) {
+  RgbViewModel(Ref ref) : super(ref) {
     _answer = ColorRGB(
       r: 125,
       g: 125,

@@ -8,10 +8,10 @@ import 'ui/home/home.dart';
 import 'ui/hsv/hsv.dart';
 import 'ui/rgb/rgb.dart';
 
-class App extends HookWidget {
+class App extends HookConsumerWidget {
   @override
-  Widget build(BuildContext context) {
-    final appTheme = useProvider(appThemeNotifierProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appTheme = ref.watch(appThemeNotifierProvider);
     final themeMode = useMemoized(() => appTheme.themeMode, [appTheme.setting]);
     final snapshot = useFuture(themeMode, initialData: ThemeMode.system);
 
