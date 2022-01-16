@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,7 +14,7 @@ class ThemeDataSourceImpl extends ThemeDataSource {
   @override
   ThemeMode? loadThemeMode() {
     final key = _prefs.getString(keyThemeMode);
-    return ThemeMode.values.firstWhere((element) => element.name == key);
+    return ThemeMode.values.firstWhereOrNull((element) => element.name == key);
   }
 
   @override
