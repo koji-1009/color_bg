@@ -17,6 +17,12 @@ class HomePage extends ConsumerWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
+              IconButton(
+                onPressed: () {
+                  showLicensePage(context: context);
+                },
+                icon: const Icon(Icons.info_outline),
+              ),
               PopupMenuButton<ThemeMode>(
                 onSelected: (result) async {
                   final appTheme = ref.read(appThemeNotifierProvider);
