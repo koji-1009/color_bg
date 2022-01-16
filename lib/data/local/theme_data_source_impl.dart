@@ -1,4 +1,3 @@
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,18 +13,14 @@ class ThemeDataSourceImpl extends ThemeDataSource {
   @override
   ThemeMode? loadThemeMode() {
     final key = _prefs.getString(keyThemeMode);
-    if (key == null) {
-      return null;
-    }
-
-    return EnumToString.fromString(ThemeMode.values, key);
+    return ThemeMode.values.firstWhere((element) => element.name == key);
   }
 
   @override
   Future<void> saveThemeMode(ThemeMode theme) {
     return _prefs.setString(
       keyThemeMode,
-      EnumToString.convertToString(theme),
+      theme.name,
     );
   }
 }
