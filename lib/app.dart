@@ -9,6 +9,8 @@ import 'ui/hsv/hsv.dart';
 import 'ui/rgb/rgb.dart';
 
 class App extends HookConsumerWidget {
+  const App({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appTheme = ref.watch(appThemeNotifierProvider);
