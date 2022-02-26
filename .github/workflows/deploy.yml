@@ -12,9 +12,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install flutter
-      uses: subosito/flutter-action@v1
+      uses: subosito/flutter-action@v2
       with:
-        channel: 'stable'
+        channel: 'master'
     - name: Build Flutter for Web
       run: flutter build web
     - name: Create dir
