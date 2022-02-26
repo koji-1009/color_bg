@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ColorRGBTearOff {
   const _$ColorRGBTearOff();
 
-  _ColorRGB call({required int r, required int g, required int b}) {
+  _ColorRGB call({int r = 125, int g = 125, int b = 125}) {
     return _ColorRGB(
       r: r,
       g: g,
@@ -122,12 +122,15 @@ class __$ColorRGBCopyWithImpl<$Res> extends _$ColorRGBCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ColorRGB with DiagnosticableTreeMixin implements _ColorRGB {
-  _$_ColorRGB({required this.r, required this.g, required this.b});
+  const _$_ColorRGB({this.r = 125, this.g = 125, this.b = 125});
 
+  @JsonKey()
   @override
   final int r;
+  @JsonKey()
   @override
   final int g;
+  @JsonKey()
   @override
   final int b;
 
@@ -170,8 +173,7 @@ class _$_ColorRGB with DiagnosticableTreeMixin implements _ColorRGB {
 }
 
 abstract class _ColorRGB implements ColorRGB {
-  factory _ColorRGB({required int r, required int g, required int b}) =
-      _$_ColorRGB;
+  const factory _ColorRGB({int r, int g, int b}) = _$_ColorRGB;
 
   @override
   int get r;

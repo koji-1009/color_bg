@@ -1,12 +1,11 @@
 import 'dart:math';
 
+import 'package:color_bootcamp/data/model/color_rgb.dart';
+import 'package:color_bootcamp/ui/rgb/rgb_view_model.dart';
+import 'package:color_bootcamp/util/ext/color_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../data/model/color_rgb.dart';
-import '../../util/ext/color_ext.dart';
-import 'rgb_view_model.dart';
 
 class RgbPage extends HookConsumerWidget {
   const RgbPage({Key? key}) : super(key: key);

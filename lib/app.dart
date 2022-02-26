@@ -14,8 +14,14 @@ class App extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appTheme = ref.watch(appThemeNotifierProvider);
-    final themeMode = useMemoized(() => appTheme.themeMode, [appTheme.setting]);
-    final snapshot = useFuture(themeMode, initialData: ThemeMode.system);
+    final themeMode = useMemoized(
+      () => appTheme.themeMode,
+      [appTheme.setting],
+    );
+    final snapshot = useFuture(
+      themeMode,
+      initialData: ThemeMode.system,
+    );
 
     return MaterialApp(
       title: Constants.appName,

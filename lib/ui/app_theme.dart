@@ -1,21 +1,27 @@
+import 'package:color_bootcamp/data/app_error.dart';
+import 'package:color_bootcamp/data/provider/theme_repository_provider.dart';
+import 'package:color_bootcamp/data/repository/theme_repository.dart';
+import 'package:color_bootcamp/ui/change_notifier_with_error_handle.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../data/app_error.dart';
-import '../data/provider/theme_repository_provider.dart';
-import '../data/repository/theme_repository.dart';
-import 'change_notifier_with_error_handle.dart';
 
 final appThemeNotifierProvider = ChangeNotifierProvider<AppTheme>(
   AppTheme.new,
 );
 
-ThemeData get lightTheme => ThemeData.from(
-      colorScheme: const ColorScheme.light(),
+ThemeData get lightTheme => ThemeData(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: Colors.blue,
+      ),
+      useMaterial3: true,
     );
 
-ThemeData get darkTheme => ThemeData.from(
-      colorScheme: const ColorScheme.dark(),
+ThemeData get darkTheme => ThemeData(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: Colors.blue,
+        brightness: Brightness.dark,
+      ),
+      useMaterial3: true,
     );
 
 class AppTheme extends AppChangeNotifier {

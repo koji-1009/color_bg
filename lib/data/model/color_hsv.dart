@@ -5,9 +5,9 @@ part 'color_hsv.freezed.dart';
 
 @freezed
 class ColorHSV with _$ColorHSV {
-  factory ColorHSV({
-    required double h,
-    required double s,
-    required double v,
+  const factory ColorHSV({
+    @Default(0.0) double h,
+    @Default(0.0) double s,
+    @Default(0.0) double v,
   }) = _ColorHSV;
 }
