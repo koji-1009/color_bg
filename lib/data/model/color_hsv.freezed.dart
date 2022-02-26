@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ColorHSVTearOff {
   const _$ColorHSVTearOff();
 
-  _ColorHSV call({required double h, required double s, required double v}) {
+  _ColorHSV call({double h = 0.0, double s = 0.0, double v = 0.0}) {
     return _ColorHSV(
       h: h,
       s: s,
@@ -122,12 +122,15 @@ class __$ColorHSVCopyWithImpl<$Res> extends _$ColorHSVCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ColorHSV with DiagnosticableTreeMixin implements _ColorHSV {
-  _$_ColorHSV({required this.h, required this.s, required this.v});
+  const _$_ColorHSV({this.h = 0.0, this.s = 0.0, this.v = 0.0});
 
+  @JsonKey()
   @override
   final double h;
+  @JsonKey()
   @override
   final double s;
+  @JsonKey()
   @override
   final double v;
 
@@ -170,8 +173,7 @@ class _$_ColorHSV with DiagnosticableTreeMixin implements _ColorHSV {
 }
 
 abstract class _ColorHSV implements ColorHSV {
-  factory _ColorHSV({required double h, required double s, required double v}) =
-      _$_ColorHSV;
+  const factory _ColorHSV({double h, double s, double v}) = _$_ColorHSV;
 
   @override
   double get h;

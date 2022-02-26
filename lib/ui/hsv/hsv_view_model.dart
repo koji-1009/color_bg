@@ -1,9 +1,8 @@
 import 'dart:math';
 
+import 'package:color_bootcamp/data/model/color_hsv.dart';
+import 'package:color_bootcamp/ui/change_notifier_with_error_handle.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../data/model/color_hsv.dart';
-import '../change_notifier_with_error_handle.dart';
 
 final hsvViewModelNotifierProvider = ChangeNotifierProvider<HsvViewModel>(
   HsvViewModel.new,
@@ -11,11 +10,7 @@ final hsvViewModelNotifierProvider = ChangeNotifierProvider<HsvViewModel>(
 
 class HsvViewModel extends AppChangeNotifier {
   HsvViewModel(Ref ref) : super(ref) {
-    _answer = ColorHSV(
-      h: 0.0,
-      s: 0.0,
-      v: 0.0,
-    );
+    _answer = const ColorHSV();
 
     changeColor();
   }

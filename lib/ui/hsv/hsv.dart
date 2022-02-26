@@ -1,9 +1,8 @@
+import 'package:color_bootcamp/data/model/color_hsv.dart';
+import 'package:color_bootcamp/ui/hsv/hsv_view_model.dart';
+import 'package:color_bootcamp/util/ext/color_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../data/model/color_hsv.dart';
-import '../../util/ext/color_ext.dart';
-import 'hsv_view_model.dart';
 
 class HsvPage extends HookConsumerWidget {
   const HsvPage({Key? key}) : super(key: key);

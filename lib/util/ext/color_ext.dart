@@ -1,7 +1,6 @@
+import 'package:color_bootcamp/data/model/color_hsv.dart';
+import 'package:color_bootcamp/data/model/color_rgb.dart';
 import 'package:flutter/painting.dart';
-
-import '../../data/model/color_hsv.dart';
-import '../../data/model/color_rgb.dart';
 
 extension ColorRGBExt on ColorRGB {
   Color get color => Color.fromARGB(255, r, g, b);

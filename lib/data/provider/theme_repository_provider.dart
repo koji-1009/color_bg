@@ -1,9 +1,10 @@
+import 'package:color_bootcamp/data/repository/theme_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../repository/theme_repository.dart';
-import '../repository/theme_repository_impl.dart';
 import 'theme_data_source_provider.dart';
 
-final themeRepositoryProvider = FutureProvider<ThemeRepository>((ref) async =>
-    ThemeRepositoryImpl(
-        dataSource: await ref.read(themeDataSourceProvider.future)));
+final themeRepositoryProvider = FutureProvider(
+  (ref) async => ThemeRepository(
+    dataSource: await ref.read(themeDataSourceProvider.future),
+  ),
+);

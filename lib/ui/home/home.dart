@@ -1,8 +1,7 @@
+import 'package:color_bootcamp/constants.dart';
+import 'package:color_bootcamp/ui/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../constants.dart';
-import '../app_theme.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,6 +9,37 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    Constants.pageRgb,
+                  );
+                },
+                child: const Text('RGB'),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    Constants.pageHsv,
+                  );
+                },
+                child: const Text('HSV'),
+              ),
+            ],
+          ),
+        ),
+      ),
       bottomNavigationBar: BottomAppBar(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -42,37 +72,6 @@ class HomePage extends ConsumerWidget {
                     child: Text('System settings'),
                   ),
                 ],
-              ),
-            ],
-          ),
-        ),
-      ),
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    Constants.pageRgb,
-                  );
-                },
-                child: const Text('RGB'),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    Constants.pageHsv,
-                  );
-                },
-                child: const Text('HSV'),
               ),
             ],
           ),

@@ -1,10 +1,10 @@
+import 'package:color_bootcamp/data/local/theme_data_source.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../local/theme_data_source_impl.dart';
 import 'shared_preferences_provider.dart';
 
-final themeDataSourceProvider = FutureProvider<ThemeDataSourceImpl>(
-  (ref) async => ThemeDataSourceImpl(
+final themeDataSourceProvider = FutureProvider(
+  (ref) async => ThemeDataSource(
     prefs: await ref.read(prefsProvider.future),
   ),
 );

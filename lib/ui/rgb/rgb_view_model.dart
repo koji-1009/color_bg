@@ -1,9 +1,8 @@
 import 'dart:math';
 
+import 'package:color_bootcamp/data/model/color_rgb.dart';
+import 'package:color_bootcamp/ui/change_notifier_with_error_handle.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../data/model/color_rgb.dart';
-import '../change_notifier_with_error_handle.dart';
 
 final rgbViewModelNotifierProvider = ChangeNotifierProvider<RgbViewModel>(
   RgbViewModel.new,
@@ -11,11 +10,7 @@ final rgbViewModelNotifierProvider = ChangeNotifierProvider<RgbViewModel>(
 
 class RgbViewModel extends AppChangeNotifier {
   RgbViewModel(Ref ref) : super(ref) {
-    _answer = ColorRGB(
-      r: 125,
-      g: 125,
-      b: 125,
-    );
+    _answer = const ColorRGB();
 
     changeColor();
   }

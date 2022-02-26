@@ -1,8 +1,7 @@
+import 'package:color_bootcamp/data/app_error.dart';
+import 'package:color_bootcamp/ui/error_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../data/app_error.dart';
-import 'error_notifier.dart';
 
 class AppChangeNotifier extends ChangeNotifier {
   AppChangeNotifier(Ref ref) : _errorNotifier = ref.read(errorNotifierProvider);
