@@ -10,17 +10,14 @@ final appThemeNotifierProvider = ChangeNotifierProvider<AppTheme>(
 );
 
 ThemeData get lightTheme => ThemeData(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.blue,
-      ),
+      colorSchemeSeed: Colors.indigo,
+      brightness: Brightness.light,
       useMaterial3: true,
     );
 
 ThemeData get darkTheme => ThemeData(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.blue,
-        brightness: Brightness.dark,
-      ),
+      colorSchemeSeed: Colors.indigo,
+      brightness: Brightness.dark,
       useMaterial3: true,
     );
 

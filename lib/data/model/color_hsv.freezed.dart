@@ -12,23 +12,7 @@ part of 'color_hsv.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$ColorHSVTearOff {
-  const _$ColorHSVTearOff();
-
-  _ColorHSV call({double h = 0.0, double s = 0.0, double v = 0.0}) {
-    return _ColorHSV(
-      h: h,
-      s: s,
-      v: v,
-    );
-  }
-}
-
-/// @nodoc
-const $ColorHSV = _$ColorHSVTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$ColorHSV {
@@ -80,21 +64,23 @@ class _$ColorHSVCopyWithImpl<$Res> implements $ColorHSVCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ColorHSVCopyWith<$Res> implements $ColorHSVCopyWith<$Res> {
-  factory _$ColorHSVCopyWith(_ColorHSV value, $Res Function(_ColorHSV) then) =
-      __$ColorHSVCopyWithImpl<$Res>;
+abstract class _$$_ColorHSVCopyWith<$Res> implements $ColorHSVCopyWith<$Res> {
+  factory _$$_ColorHSVCopyWith(
+          _$_ColorHSV value, $Res Function(_$_ColorHSV) then) =
+      __$$_ColorHSVCopyWithImpl<$Res>;
   @override
   $Res call({double h, double s, double v});
 }
 
 /// @nodoc
-class __$ColorHSVCopyWithImpl<$Res> extends _$ColorHSVCopyWithImpl<$Res>
-    implements _$ColorHSVCopyWith<$Res> {
-  __$ColorHSVCopyWithImpl(_ColorHSV _value, $Res Function(_ColorHSV) _then)
-      : super(_value, (v) => _then(v as _ColorHSV));
+class __$$_ColorHSVCopyWithImpl<$Res> extends _$ColorHSVCopyWithImpl<$Res>
+    implements _$$_ColorHSVCopyWith<$Res> {
+  __$$_ColorHSVCopyWithImpl(
+      _$_ColorHSV _value, $Res Function(_$_ColorHSV) _then)
+      : super(_value, (v) => _then(v as _$_ColorHSV));
 
   @override
-  _ColorHSV get _value => super._value as _ColorHSV;
+  _$_ColorHSV get _value => super._value as _$_ColorHSV;
 
   @override
   $Res call({
@@ -102,7 +88,7 @@ class __$ColorHSVCopyWithImpl<$Res> extends _$ColorHSVCopyWithImpl<$Res>
     Object? s = freezed,
     Object? v = freezed,
   }) {
-    return _then(_ColorHSV(
+    return _then(_$_ColorHSV(
       h: h == freezed
           ? _value.h
           : h // ignore: cast_nullable_to_non_nullable
@@ -124,14 +110,14 @@ class __$ColorHSVCopyWithImpl<$Res> extends _$ColorHSVCopyWithImpl<$Res>
 class _$_ColorHSV with DiagnosticableTreeMixin implements _ColorHSV {
   const _$_ColorHSV({this.h = 0.0, this.s = 0.0, this.v = 0.0});
 
-  @JsonKey()
   @override
+  @JsonKey()
   final double h;
-  @JsonKey()
   @override
+  @JsonKey()
   final double s;
-  @JsonKey()
   @override
+  @JsonKey()
   final double v;
 
   @override
@@ -153,7 +139,7 @@ class _$_ColorHSV with DiagnosticableTreeMixin implements _ColorHSV {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ColorHSV &&
+            other is _$_ColorHSV &&
             const DeepCollectionEquality().equals(other.h, h) &&
             const DeepCollectionEquality().equals(other.s, s) &&
             const DeepCollectionEquality().equals(other.v, v));
@@ -168,12 +154,13 @@ class _$_ColorHSV with DiagnosticableTreeMixin implements _ColorHSV {
 
   @JsonKey(ignore: true)
   @override
-  _$ColorHSVCopyWith<_ColorHSV> get copyWith =>
-      __$ColorHSVCopyWithImpl<_ColorHSV>(this, _$identity);
+  _$$_ColorHSVCopyWith<_$_ColorHSV> get copyWith =>
+      __$$_ColorHSVCopyWithImpl<_$_ColorHSV>(this, _$identity);
 }
 
 abstract class _ColorHSV implements ColorHSV {
-  const factory _ColorHSV({double h, double s, double v}) = _$_ColorHSV;
+  const factory _ColorHSV({final double h, final double s, final double v}) =
+      _$_ColorHSV;
 
   @override
   double get h;
@@ -183,6 +170,6 @@ abstract class _ColorHSV implements ColorHSV {
   double get v;
   @override
   @JsonKey(ignore: true)
-  _$ColorHSVCopyWith<_ColorHSV> get copyWith =>
+  _$$_ColorHSVCopyWith<_$_ColorHSV> get copyWith =>
       throw _privateConstructorUsedError;
 }
