@@ -16,6 +16,10 @@ class HomePage extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  onPrimary: Theme.of(context).colorScheme.onPrimary,
+                  primary: Theme.of(context).colorScheme.primary,
+                ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
                 onPressed: () {
                   Navigator.pushNamed(
                     context,
@@ -28,6 +32,10 @@ class HomePage extends ConsumerWidget {
                 height: 16,
               ),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  onPrimary: Theme.of(context).colorScheme.onPrimary,
+                  primary: Theme.of(context).colorScheme.primary,
+                ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
                 onPressed: () {
                   Navigator.pushNamed(
                     context,

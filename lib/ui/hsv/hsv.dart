@@ -144,7 +144,7 @@ class HsvPage extends HookConsumerWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         Expanded(
           child: Slider(
@@ -161,7 +161,7 @@ class HsvPage extends HookConsumerWidget {
           width: 60,
           child: Text(
             selectValue.toStringAsFixed(decimal),
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
       ],
@@ -169,7 +169,7 @@ class HsvPage extends HookConsumerWidget {
   }
 
   void _showResultSheet(WidgetRef ref, BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.subtitle1;
+    final textStyle = Theme.of(context).textTheme.titleMedium;
 
     final viewModel = ref.read(hsvViewModelNotifierProvider);
     final question = viewModel.question;
@@ -187,11 +187,11 @@ class HsvPage extends HookConsumerWidget {
           children: [
             Text(
               'Check $checkTimes times',
-              style: Theme.of(context).textTheme.subtitle1,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             Text(
               _checkAnswer(question: question, answer: answer),
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 16),
             Table(
@@ -226,6 +226,10 @@ class HsvPage extends HookConsumerWidget {
             ),
             const SizedBox(height: 32),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                onPrimary: Theme.of(context).colorScheme.onPrimary,
+                primary: Theme.of(context).colorScheme.primary,
+              ).copyWith(elevation: ButtonStyleButton.allOrNull(0.0)),
               child: const Text('next color'),
               onPressed: () {
                 _nextColor(ref, context);
@@ -239,7 +243,7 @@ class HsvPage extends HookConsumerWidget {
   }
 
   void _showGiveUpSheet(WidgetRef ref, BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.headline6;
+    final textStyle = Theme.of(context).textTheme.titleLarge;
     final question = ref.read(hsvViewModelNotifierProvider).question;
 
     showModalBottomSheet(
