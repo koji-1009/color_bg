@@ -12,23 +12,7 @@ part of 'color_rgb.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$ColorRGBTearOff {
-  const _$ColorRGBTearOff();
-
-  _ColorRGB call({int r = 125, int g = 125, int b = 125}) {
-    return _ColorRGB(
-      r: r,
-      g: g,
-      b: b,
-    );
-  }
-}
-
-/// @nodoc
-const $ColorRGB = _$ColorRGBTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$ColorRGB {
@@ -80,21 +64,23 @@ class _$ColorRGBCopyWithImpl<$Res> implements $ColorRGBCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ColorRGBCopyWith<$Res> implements $ColorRGBCopyWith<$Res> {
-  factory _$ColorRGBCopyWith(_ColorRGB value, $Res Function(_ColorRGB) then) =
-      __$ColorRGBCopyWithImpl<$Res>;
+abstract class _$$_ColorRGBCopyWith<$Res> implements $ColorRGBCopyWith<$Res> {
+  factory _$$_ColorRGBCopyWith(
+          _$_ColorRGB value, $Res Function(_$_ColorRGB) then) =
+      __$$_ColorRGBCopyWithImpl<$Res>;
   @override
   $Res call({int r, int g, int b});
 }
 
 /// @nodoc
-class __$ColorRGBCopyWithImpl<$Res> extends _$ColorRGBCopyWithImpl<$Res>
-    implements _$ColorRGBCopyWith<$Res> {
-  __$ColorRGBCopyWithImpl(_ColorRGB _value, $Res Function(_ColorRGB) _then)
-      : super(_value, (v) => _then(v as _ColorRGB));
+class __$$_ColorRGBCopyWithImpl<$Res> extends _$ColorRGBCopyWithImpl<$Res>
+    implements _$$_ColorRGBCopyWith<$Res> {
+  __$$_ColorRGBCopyWithImpl(
+      _$_ColorRGB _value, $Res Function(_$_ColorRGB) _then)
+      : super(_value, (v) => _then(v as _$_ColorRGB));
 
   @override
-  _ColorRGB get _value => super._value as _ColorRGB;
+  _$_ColorRGB get _value => super._value as _$_ColorRGB;
 
   @override
   $Res call({
@@ -102,7 +88,7 @@ class __$ColorRGBCopyWithImpl<$Res> extends _$ColorRGBCopyWithImpl<$Res>
     Object? g = freezed,
     Object? b = freezed,
   }) {
-    return _then(_ColorRGB(
+    return _then(_$_ColorRGB(
       r: r == freezed
           ? _value.r
           : r // ignore: cast_nullable_to_non_nullable
@@ -124,14 +110,14 @@ class __$ColorRGBCopyWithImpl<$Res> extends _$ColorRGBCopyWithImpl<$Res>
 class _$_ColorRGB with DiagnosticableTreeMixin implements _ColorRGB {
   const _$_ColorRGB({this.r = 125, this.g = 125, this.b = 125});
 
-  @JsonKey()
   @override
+  @JsonKey()
   final int r;
-  @JsonKey()
   @override
+  @JsonKey()
   final int g;
-  @JsonKey()
   @override
+  @JsonKey()
   final int b;
 
   @override
@@ -153,7 +139,7 @@ class _$_ColorRGB with DiagnosticableTreeMixin implements _ColorRGB {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ColorRGB &&
+            other is _$_ColorRGB &&
             const DeepCollectionEquality().equals(other.r, r) &&
             const DeepCollectionEquality().equals(other.g, g) &&
             const DeepCollectionEquality().equals(other.b, b));
@@ -168,12 +154,13 @@ class _$_ColorRGB with DiagnosticableTreeMixin implements _ColorRGB {
 
   @JsonKey(ignore: true)
   @override
-  _$ColorRGBCopyWith<_ColorRGB> get copyWith =>
-      __$ColorRGBCopyWithImpl<_ColorRGB>(this, _$identity);
+  _$$_ColorRGBCopyWith<_$_ColorRGB> get copyWith =>
+      __$$_ColorRGBCopyWithImpl<_$_ColorRGB>(this, _$identity);
 }
 
 abstract class _ColorRGB implements ColorRGB {
-  const factory _ColorRGB({int r, int g, int b}) = _$_ColorRGB;
+  const factory _ColorRGB({final int r, final int g, final int b}) =
+      _$_ColorRGB;
 
   @override
   int get r;
@@ -183,6 +170,6 @@ abstract class _ColorRGB implements ColorRGB {
   int get b;
   @override
   @JsonKey(ignore: true)
-  _$ColorRGBCopyWith<_ColorRGB> get copyWith =>
+  _$$_ColorRGBCopyWith<_$_ColorRGB> get copyWith =>
       throw _privateConstructorUsedError;
 }
