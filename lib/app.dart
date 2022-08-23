@@ -1,18 +1,15 @@
+import 'package:color_bootcamp/logic/app_theme_manager.dart';
+import 'package:color_bootcamp/ui/home.dart';
+import 'package:color_bootcamp/ui/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'constants.dart';
-import 'ui/app_theme.dart';
-import 'ui/home/home.dart';
-import 'ui/hsv/hsv.dart';
-import 'ui/rgb/rgb.dart';
-
-class App extends HookConsumerWidget {
+class App extends ConsumerWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(appThemeNotifierProvider);
+    final themeMode = ref.watch(themeModeProvider);
 
     return MaterialApp(
       title: 'Color BootCamp',
@@ -20,11 +17,6 @@ class App extends HookConsumerWidget {
       darkTheme: darkTheme,
       themeMode: themeMode,
       home: const HomePage(),
-      routes: {
-        Constants.pageHome: (_) => const HomePage(),
-        Constants.pageRgb: (_) => const RgbPage(),
-        Constants.pageHsv: (_) => const HsvPage(),
-      },
     );
   }
 }

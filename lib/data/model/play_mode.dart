@@ -1,0 +1,4 @@
+enum PlayMode {
+  rgb,
+  hsv,
+}
