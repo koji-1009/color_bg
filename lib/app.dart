@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'constants.dart';
@@ -9,25 +8,17 @@ import 'ui/hsv/hsv.dart';
 import 'ui/rgb/rgb.dart';
 
 class App extends HookConsumerWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appTheme = ref.watch(appThemeNotifierProvider);
-    final themeMode = useMemoized(
-      () => appTheme.themeMode,
-      [appTheme.setting],
-    );
-    final snapshot = useFuture(
-      themeMode,
-      initialData: ThemeMode.system,
-    );
+    final themeMode = ref.watch(appThemeNotifierProvider);
 
     return MaterialApp(
-      title: Constants.appName,
+      title: 'Color BootCamp',
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: snapshot.data,
+      themeMode: themeMode,
       home: const HomePage(),
       routes: {
         Constants.pageHome: (_) => const HomePage(),

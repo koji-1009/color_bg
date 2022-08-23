@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RgbPage extends HookConsumerWidget {
-  const RgbPage({Key? key}) : super(key: key);
+  const RgbPage({super.key});
 
   final _colorSize = 120.0;
 

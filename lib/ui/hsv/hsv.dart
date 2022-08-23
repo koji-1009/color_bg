@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HsvPage extends HookConsumerWidget {
-  const HsvPage({Key? key}) : super(key: key);
+  const HsvPage({super.key});
 
   final _colorSize = 120.0;
 

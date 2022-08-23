@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,13 +10,16 @@ class ThemeDataSource {
 
   final SharedPreferences _prefs;
 
-  ThemeMode? loadThemeMode() {
+  ThemeMode get themeMode {
     final key = _prefs.getString(keyThemeMode);
-    return ThemeMode.values.firstWhereOrNull((element) => element.name == key);
+    return ThemeMode.values.firstWhere(
+      (e) => e.name == key,
+      orElse: () => ThemeMode.system,
+    );
   }
 
-  Future<void> saveThemeMode(ThemeMode theme) {
-    return _prefs.setString(
+  set themeMode(ThemeMode theme) {
+    _prefs.setString(
       keyThemeMode,
       theme.name,
     );
