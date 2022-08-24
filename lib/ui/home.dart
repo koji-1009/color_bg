@@ -5,8 +5,8 @@ import 'package:color_bootcamp/ext/color_ext.dart';
 import 'package:color_bootcamp/logic/answer_manager.dart';
 import 'package:color_bootcamp/logic/app_theme_manager.dart';
 import 'package:color_bootcamp/logic/question_manager.dart';
-import 'package:color_bootcamp/ui/widget/hsv.dart';
-import 'package:color_bootcamp/ui/widget/rgb.dart';
+import 'package:color_bootcamp/ui/widget/hsv_panel.dart';
+import 'package:color_bootcamp/ui/widget/rgb_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -37,10 +37,10 @@ class HomePage extends ConsumerWidget {
           ),
           PopupMenuButton<ThemeMode>(
             tooltip: 'App theme',
-            onSelected: (result) async {
+            onSelected: (result) {
               ref.read(themeModeProvider.notifier).update(result);
             },
-            itemBuilder: (context) => <PopupMenuEntry<ThemeMode>>[
+            itemBuilder: (context) => [
               const PopupMenuItem<ThemeMode>(
                 value: ThemeMode.light,
                 child: Text('Light theme'),
@@ -127,7 +127,9 @@ class HomePage extends ConsumerWidget {
                       ref.read(answerProvider.notifier).scoreText(),
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(
+                      height: 16,
+                    ),
                     Table(
                       defaultColumnWidth: const FixedColumnWidth(120),
                       children: [
@@ -159,7 +161,9 @@ class HomePage extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 32),
+                    const SizedBox(
+                      height: 32,
+                    ),
                     OutlinedButton(
                       child: const Text('next color'),
                       onPressed: () {
@@ -187,6 +191,7 @@ class HomePage extends ConsumerWidget {
               const Spacer(),
               IconButton(
                 tooltip: 'Give up',
+                icon: const Icon(Icons.flag_outlined),
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,
@@ -204,15 +209,19 @@ class HomePage extends ConsumerWidget {
                                     'R: ${question.red}, '
                                     'G: ${question.green}, '
                                     'B: ${question.blue}',
-                                    style: Theme.of(context).textTheme.titleLarge,
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
                                   )
                                 : Text(
                                     'H: ${question.hsv.hue.toStringAsFixed(1)}, '
                                     'S: ${question.hsv.saturation.toStringAsFixed(2)}, '
                                     'V: ${question.hsv.value.toStringAsFixed(2)}',
-                                    style: Theme.of(context).textTheme.titleLarge,
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
                                   ),
-                            const SizedBox(height: 32),
+                            const SizedBox(
+                              height: 32,
+                            ),
                             OutlinedButton(
                               child: const Text('next color'),
                               onPressed: () {
@@ -227,7 +236,6 @@ class HomePage extends ConsumerWidget {
                     ),
                   );
                 },
-                icon: const Icon(Icons.flag_outlined),
               ),
             ],
           ),
