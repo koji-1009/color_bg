@@ -1,23 +1,27 @@
 import 'package:color_bootcamp/data/model/answer.dart';
+import 'package:color_bootcamp/data/model/history.dart';
 import 'package:color_bootcamp/data/model/play_mode.dart';
+import 'package:color_bootcamp/data/provider/hive_history_box_provider.dart';
 import 'package:color_bootcamp/logic/question_manager.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
 
 final answerProvider = StateNotifierProvider.autoDispose<AnswerManager, Answer>(
   (ref) => AnswerManager(
-    question: ref.watch(
-      questionProvider,
-    ),
+    question: ref.watch(questionProvider),
+    historyBox: ref.watch(hiveHistoryBoxProvider),
   ),
 );
 
 class AnswerManager extends StateNotifier<Answer> {
   AnswerManager({
     required this.question,
+    required this.historyBox,
   }) : super(Answer.create());
 
   final Color question;
+  final Box<History> historyBox;
 
   ColorEntity get answer {
     switch (state.mode) {
@@ -105,6 +109,21 @@ class AnswerManager extends StateNotifier<Answer> {
           answer: state.hsv,
         );
     }
+  }
+
+  void saveResult() {
+    historyBox.add(
+      History(
+        dateTime: DateTime.now(),
+        question: question,
+        answer: HistoryAnswer(
+          hsvColor: state.hsv.color,
+          rgbColor: state.rgb.color,
+          checkTimes: state.checkTimes,
+        ),
+        score: scoreText(),
+      ),
+    );
   }
 
   String _checkRGB({

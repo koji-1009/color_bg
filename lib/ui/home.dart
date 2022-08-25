@@ -9,6 +9,7 @@ import 'package:color_bootcamp/ui/widget/hsv_panel.dart';
 import 'package:color_bootcamp/ui/widget/rgb_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -30,6 +31,9 @@ class HomePage extends ConsumerWidget {
             tooltip: 'Option Menu',
             onSelected: (value) async {
               switch (value) {
+                case _OptionMenu.history:
+                  context.go('/history');
+                  break;
                 case _OptionMenu.themeMode:
                   final mode = await showMenu(
                     context: context,
@@ -63,6 +67,10 @@ class HomePage extends ConsumerWidget {
               }
             },
             itemBuilder: (context) => const [
+              PopupMenuItem(
+                value: _OptionMenu.history,
+                child: Text('History'),
+              ),
               PopupMenuItem(
                 value: _OptionMenu.themeMode,
                 child: Text('Theme Mode'),
@@ -185,6 +193,7 @@ class HomePage extends ConsumerWidget {
                     OutlinedButton(
                       child: const Text('next color'),
                       onPressed: () {
+                        ref.read(answerProvider.notifier).saveResult();
                         ref.refresh(questionProvider);
 
                         Navigator.of(context).pop();
@@ -243,7 +252,8 @@ class HomePage extends ConsumerWidget {
                             OutlinedButton(
                               child: const Text('next color'),
                               onPressed: () {
-                                ref.read(questionProvider);
+                                ref.read(answerProvider.notifier).saveResult();
+                                ref.refresh(questionProvider);
 
                                 Navigator.of(context).pop();
                               },
@@ -264,6 +274,7 @@ class HomePage extends ConsumerWidget {
 }
 
 enum _OptionMenu {
+  history,
   themeMode,
   license,
 }
