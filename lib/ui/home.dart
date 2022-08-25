@@ -9,6 +9,7 @@ import 'package:color_bootcamp/ui/widget/hsv_panel.dart';
 import 'package:color_bootcamp/ui/widget/rgb_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -26,32 +27,57 @@ class HomePage extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Color BootCamp'),
         actions: [
-          IconButton(
-            tooltip: 'App licenses',
-            onPressed: () {
-              showLicensePage(
-                context: context,
-              );
+          PopupMenuButton<_OptionMenu>(
+            tooltip: 'Option Menu',
+            onSelected: (value) async {
+              switch (value) {
+                case _OptionMenu.history:
+                  context.go('/history');
+                  break;
+                case _OptionMenu.themeMode:
+                  final mode = await showMenu(
+                    context: context,
+                    position: const RelativeRect.fromLTRB(1, 0, 0, 0),
+                    items: [
+                      const PopupMenuItem<ThemeMode>(
+                        value: ThemeMode.light,
+                        child: Text('Light theme'),
+                      ),
+                      const PopupMenuItem<ThemeMode>(
+                        value: ThemeMode.dark,
+                        child: Text('Dark theme'),
+                      ),
+                      const PopupMenuItem<ThemeMode>(
+                        value: ThemeMode.system,
+                        child: Text('System settings'),
+                      ),
+                    ],
+                  );
+                  if (mode == null) {
+                    return;
+                  }
+
+                  ref.read(themeModeProvider.notifier).update(mode);
+                  break;
+                case _OptionMenu.license:
+                  showLicensePage(
+                    context: context,
+                  );
+                  break;
+              }
             },
-            icon: const Icon(Icons.info_outline),
-          ),
-          PopupMenuButton<ThemeMode>(
-            tooltip: 'App theme',
-            onSelected: (result) {
-              ref.read(themeModeProvider.notifier).update(result);
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem<ThemeMode>(
-                value: ThemeMode.light,
-                child: Text('Light theme'),
+            itemBuilder: (context) => const [
+              PopupMenuItem(
+                value: _OptionMenu.history,
+                child: Text('History'),
               ),
-              const PopupMenuItem<ThemeMode>(
-                value: ThemeMode.dark,
-                child: Text('Dark theme'),
+              PopupMenuItem(
+                value: _OptionMenu.themeMode,
+                child: Text('Theme Mode'),
               ),
-              const PopupMenuItem<ThemeMode>(
-                value: ThemeMode.system,
-                child: Text('System settings'),
+              PopupMenuItem(
+                value: _OptionMenu.license,
+                child: Text('License'),
               ),
             ],
           ),
@@ -167,6 +193,7 @@ class HomePage extends ConsumerWidget {
                     OutlinedButton(
                       child: const Text('next color'),
                       onPressed: () {
+                        ref.read(answerProvider.notifier).saveResult();
                         ref.refresh(questionProvider);
 
                         Navigator.of(context).pop();
@@ -225,7 +252,8 @@ class HomePage extends ConsumerWidget {
                             OutlinedButton(
                               child: const Text('next color'),
                               onPressed: () {
-                                ref.read(questionProvider);
+                                ref.read(answerProvider.notifier).saveResult();
+                                ref.refresh(questionProvider);
 
                                 Navigator.of(context).pop();
                               },
@@ -243,6 +271,12 @@ class HomePage extends ConsumerWidget {
       ),
     );
   }
+}
+
+enum _OptionMenu {
+  history,
+  themeMode,
+  license,
 }
 
 extension on PlayMode {

@@ -35,6 +35,14 @@ class ColorEntity with _$ColorEntity {
   }) = ColorHSV;
 }
 
+extension ColorRGBExt on ColorRGB {
+  Color get color => Color.fromARGB(255, r, g, b);
+}
+
+extension ColorHSVExt on ColorHSV {
+  HSVColor get color => HSVColor.fromAHSV(1, h, s, v);
+}
+
 extension ColorEntityExt on ColorEntity {
   Color get color {
     return when(
