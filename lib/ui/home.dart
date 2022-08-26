@@ -209,8 +209,8 @@ class HomePage extends ConsumerWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: margin,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
             vertical: 8,
           ),
           child: Row(
