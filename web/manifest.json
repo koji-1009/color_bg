@@ -1,6 +1,6 @@
 {
-    "name": "color_bg",
-    "short_name": "color_bg",
+    "name": "color_bootcamp",
+    "short_name": "color_bootcamp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

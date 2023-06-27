@@ -44,7 +44,7 @@ class _HistoryPageState extends ConsumerState<HistoryPage> {
                     TextButton(
                       onPressed: () async {
                         await box.clear();
-                        ref.refresh(hiveHistoryBoxProvider);
+                        ref.invalidate(hiveHistoryBoxProvider);
 
                         if (!mounted) {
                           return;

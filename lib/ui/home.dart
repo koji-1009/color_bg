@@ -194,7 +194,7 @@ class HomePage extends ConsumerWidget {
                       child: const Text('next color'),
                       onPressed: () {
                         ref.read(answerProvider.notifier).saveResult();
-                        ref.refresh(questionProvider);
+                        ref.invalidate(questionProvider);
 
                         Navigator.of(context).pop();
                       },
@@ -253,7 +253,7 @@ class HomePage extends ConsumerWidget {
                               child: const Text('next color'),
                               onPressed: () {
                                 ref.read(answerProvider.notifier).saveResult();
-                                ref.refresh(questionProvider);
+                                ref.invalidate(questionProvider);
 
                                 Navigator.of(context).pop();
                               },
