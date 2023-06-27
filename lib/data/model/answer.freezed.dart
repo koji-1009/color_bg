@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'answer.dart';
 
@@ -28,43 +28,47 @@ mixin _$Answer {
 /// @nodoc
 abstract class $AnswerCopyWith<$Res> {
   factory $AnswerCopyWith(Answer value, $Res Function(Answer) then) =
-      _$AnswerCopyWithImpl<$Res>;
+      _$AnswerCopyWithImpl<$Res, Answer>;
+  @useResult
   $Res call({PlayMode mode, ColorRGB rgb, ColorHSV hsv, int checkTimes});
 }
 
 /// @nodoc
-class _$AnswerCopyWithImpl<$Res> implements $AnswerCopyWith<$Res> {
+class _$AnswerCopyWithImpl<$Res, $Val extends Answer>
+    implements $AnswerCopyWith<$Res> {
   _$AnswerCopyWithImpl(this._value, this._then);
 
-  final Answer _value;
   // ignore: unused_field
-  final $Res Function(Answer) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? mode = freezed,
+    Object? mode = null,
     Object? rgb = freezed,
     Object? hsv = freezed,
-    Object? checkTimes = freezed,
+    Object? checkTimes = null,
   }) {
     return _then(_value.copyWith(
-      mode: mode == freezed
+      mode: null == mode
           ? _value.mode
           : mode // ignore: cast_nullable_to_non_nullable
               as PlayMode,
-      rgb: rgb == freezed
+      rgb: freezed == rgb
           ? _value.rgb
           : rgb // ignore: cast_nullable_to_non_nullable
               as ColorRGB,
-      hsv: hsv == freezed
+      hsv: freezed == hsv
           ? _value.hsv
           : hsv // ignore: cast_nullable_to_non_nullable
               as ColorHSV,
-      checkTimes: checkTimes == freezed
+      checkTimes: null == checkTimes
           ? _value.checkTimes
           : checkTimes // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -73,39 +77,39 @@ abstract class _$$_AnswerCopyWith<$Res> implements $AnswerCopyWith<$Res> {
   factory _$$_AnswerCopyWith(_$_Answer value, $Res Function(_$_Answer) then) =
       __$$_AnswerCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({PlayMode mode, ColorRGB rgb, ColorHSV hsv, int checkTimes});
 }
 
 /// @nodoc
-class __$$_AnswerCopyWithImpl<$Res> extends _$AnswerCopyWithImpl<$Res>
+class __$$_AnswerCopyWithImpl<$Res>
+    extends _$AnswerCopyWithImpl<$Res, _$_Answer>
     implements _$$_AnswerCopyWith<$Res> {
   __$$_AnswerCopyWithImpl(_$_Answer _value, $Res Function(_$_Answer) _then)
-      : super(_value, (v) => _then(v as _$_Answer));
+      : super(_value, _then);
 
-  @override
-  _$_Answer get _value => super._value as _$_Answer;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? mode = freezed,
+    Object? mode = null,
     Object? rgb = freezed,
     Object? hsv = freezed,
-    Object? checkTimes = freezed,
+    Object? checkTimes = null,
   }) {
     return _then(_$_Answer(
-      mode: mode == freezed
+      mode: null == mode
           ? _value.mode
           : mode // ignore: cast_nullable_to_non_nullable
               as PlayMode,
-      rgb: rgb == freezed
+      rgb: freezed == rgb
           ? _value.rgb
           : rgb // ignore: cast_nullable_to_non_nullable
               as ColorRGB,
-      hsv: hsv == freezed
+      hsv: freezed == hsv
           ? _value.hsv
           : hsv // ignore: cast_nullable_to_non_nullable
               as ColorHSV,
-      checkTimes: checkTimes == freezed
+      checkTimes: null == checkTimes
           ? _value.checkTimes
           : checkTimes // ignore: cast_nullable_to_non_nullable
               as int,
@@ -154,23 +158,24 @@ class _$_Answer with DiagnosticableTreeMixin implements _Answer {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Answer &&
-            const DeepCollectionEquality().equals(other.mode, mode) &&
+            (identical(other.mode, mode) || other.mode == mode) &&
             const DeepCollectionEquality().equals(other.rgb, rgb) &&
             const DeepCollectionEquality().equals(other.hsv, hsv) &&
-            const DeepCollectionEquality()
-                .equals(other.checkTimes, checkTimes));
+            (identical(other.checkTimes, checkTimes) ||
+                other.checkTimes == checkTimes));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(mode),
+      mode,
       const DeepCollectionEquality().hash(rgb),
       const DeepCollectionEquality().hash(hsv),
-      const DeepCollectionEquality().hash(checkTimes));
+      checkTimes);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AnswerCopyWith<_$_Answer> get copyWith =>
       __$$_AnswerCopyWithImpl<_$_Answer>(this, _$identity);
 }
@@ -206,8 +211,8 @@ mixin _$ColorEntity {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int r, int g, int b)? rgb,
-    TResult Function(double h, double s, double v)? hsv,
+    TResult? Function(int r, int g, int b)? rgb,
+    TResult? Function(double h, double s, double v)? hsv,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -225,8 +230,8 @@ mixin _$ColorEntity {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ColorRGB value)? rgb,
-    TResult Function(ColorHSV value)? hsv,
+    TResult? Function(ColorRGB value)? rgb,
+    TResult? Function(ColorHSV value)? hsv,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -242,16 +247,18 @@ mixin _$ColorEntity {
 abstract class $ColorEntityCopyWith<$Res> {
   factory $ColorEntityCopyWith(
           ColorEntity value, $Res Function(ColorEntity) then) =
-      _$ColorEntityCopyWithImpl<$Res>;
+      _$ColorEntityCopyWithImpl<$Res, ColorEntity>;
 }
 
 /// @nodoc
-class _$ColorEntityCopyWithImpl<$Res> implements $ColorEntityCopyWith<$Res> {
+class _$ColorEntityCopyWithImpl<$Res, $Val extends ColorEntity>
+    implements $ColorEntityCopyWith<$Res> {
   _$ColorEntityCopyWithImpl(this._value, this._then);
 
-  final ColorEntity _value;
   // ignore: unused_field
-  final $Res Function(ColorEntity) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -259,34 +266,34 @@ abstract class _$$ColorRGBCopyWith<$Res> {
   factory _$$ColorRGBCopyWith(
           _$ColorRGB value, $Res Function(_$ColorRGB) then) =
       __$$ColorRGBCopyWithImpl<$Res>;
+  @useResult
   $Res call({int r, int g, int b});
 }
 
 /// @nodoc
-class __$$ColorRGBCopyWithImpl<$Res> extends _$ColorEntityCopyWithImpl<$Res>
+class __$$ColorRGBCopyWithImpl<$Res>
+    extends _$ColorEntityCopyWithImpl<$Res, _$ColorRGB>
     implements _$$ColorRGBCopyWith<$Res> {
   __$$ColorRGBCopyWithImpl(_$ColorRGB _value, $Res Function(_$ColorRGB) _then)
-      : super(_value, (v) => _then(v as _$ColorRGB));
+      : super(_value, _then);
 
-  @override
-  _$ColorRGB get _value => super._value as _$ColorRGB;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? r = freezed,
-    Object? g = freezed,
-    Object? b = freezed,
+    Object? r = null,
+    Object? g = null,
+    Object? b = null,
   }) {
     return _then(_$ColorRGB(
-      r: r == freezed
+      r: null == r
           ? _value.r
           : r // ignore: cast_nullable_to_non_nullable
               as int,
-      g: g == freezed
+      g: null == g
           ? _value.g
           : g // ignore: cast_nullable_to_non_nullable
               as int,
-      b: b == freezed
+      b: null == b
           ? _value.b
           : b // ignore: cast_nullable_to_non_nullable
               as int,
@@ -329,20 +336,17 @@ class _$ColorRGB with DiagnosticableTreeMixin implements ColorRGB {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ColorRGB &&
-            const DeepCollectionEquality().equals(other.r, r) &&
-            const DeepCollectionEquality().equals(other.g, g) &&
-            const DeepCollectionEquality().equals(other.b, b));
+            (identical(other.r, r) || other.r == r) &&
+            (identical(other.g, g) || other.g == g) &&
+            (identical(other.b, b) || other.b == b));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(r),
-      const DeepCollectionEquality().hash(g),
-      const DeepCollectionEquality().hash(b));
+  int get hashCode => Object.hash(runtimeType, r, g, b);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ColorRGBCopyWith<_$ColorRGB> get copyWith =>
       __$$ColorRGBCopyWithImpl<_$ColorRGB>(this, _$identity);
 
@@ -358,8 +362,8 @@ class _$ColorRGB with DiagnosticableTreeMixin implements ColorRGB {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int r, int g, int b)? rgb,
-    TResult Function(double h, double s, double v)? hsv,
+    TResult? Function(int r, int g, int b)? rgb,
+    TResult? Function(double h, double s, double v)? hsv,
   }) {
     return rgb?.call(r, g, b);
   }
@@ -389,8 +393,8 @@ class _$ColorRGB with DiagnosticableTreeMixin implements ColorRGB {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ColorRGB value)? rgb,
-    TResult Function(ColorHSV value)? hsv,
+    TResult? Function(ColorRGB value)? rgb,
+    TResult? Function(ColorHSV value)? hsv,
   }) {
     return rgb?.call(this);
   }
@@ -425,34 +429,34 @@ abstract class _$$ColorHSVCopyWith<$Res> {
   factory _$$ColorHSVCopyWith(
           _$ColorHSV value, $Res Function(_$ColorHSV) then) =
       __$$ColorHSVCopyWithImpl<$Res>;
+  @useResult
   $Res call({double h, double s, double v});
 }
 
 /// @nodoc
-class __$$ColorHSVCopyWithImpl<$Res> extends _$ColorEntityCopyWithImpl<$Res>
+class __$$ColorHSVCopyWithImpl<$Res>
+    extends _$ColorEntityCopyWithImpl<$Res, _$ColorHSV>
     implements _$$ColorHSVCopyWith<$Res> {
   __$$ColorHSVCopyWithImpl(_$ColorHSV _value, $Res Function(_$ColorHSV) _then)
-      : super(_value, (v) => _then(v as _$ColorHSV));
+      : super(_value, _then);
 
-  @override
-  _$ColorHSV get _value => super._value as _$ColorHSV;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? h = freezed,
-    Object? s = freezed,
-    Object? v = freezed,
+    Object? h = null,
+    Object? s = null,
+    Object? v = null,
   }) {
     return _then(_$ColorHSV(
-      h: h == freezed
+      h: null == h
           ? _value.h
           : h // ignore: cast_nullable_to_non_nullable
               as double,
-      s: s == freezed
+      s: null == s
           ? _value.s
           : s // ignore: cast_nullable_to_non_nullable
               as double,
-      v: v == freezed
+      v: null == v
           ? _value.v
           : v // ignore: cast_nullable_to_non_nullable
               as double,
@@ -495,20 +499,17 @@ class _$ColorHSV with DiagnosticableTreeMixin implements ColorHSV {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ColorHSV &&
-            const DeepCollectionEquality().equals(other.h, h) &&
-            const DeepCollectionEquality().equals(other.s, s) &&
-            const DeepCollectionEquality().equals(other.v, v));
+            (identical(other.h, h) || other.h == h) &&
+            (identical(other.s, s) || other.s == s) &&
+            (identical(other.v, v) || other.v == v));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(h),
-      const DeepCollectionEquality().hash(s),
-      const DeepCollectionEquality().hash(v));
+  int get hashCode => Object.hash(runtimeType, h, s, v);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ColorHSVCopyWith<_$ColorHSV> get copyWith =>
       __$$ColorHSVCopyWithImpl<_$ColorHSV>(this, _$identity);
 
@@ -524,8 +525,8 @@ class _$ColorHSV with DiagnosticableTreeMixin implements ColorHSV {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int r, int g, int b)? rgb,
-    TResult Function(double h, double s, double v)? hsv,
+    TResult? Function(int r, int g, int b)? rgb,
+    TResult? Function(double h, double s, double v)? hsv,
   }) {
     return hsv?.call(h, s, v);
   }
@@ -555,8 +556,8 @@ class _$ColorHSV with DiagnosticableTreeMixin implements ColorHSV {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ColorRGB value)? rgb,
-    TResult Function(ColorHSV value)? hsv,
+    TResult? Function(ColorRGB value)? rgb,
+    TResult? Function(ColorHSV value)? hsv,
   }) {
     return hsv?.call(this);
   }

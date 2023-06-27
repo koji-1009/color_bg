@@ -10,16 +10,16 @@ final themeDataSourceProvider = Provider(
 );
 
 class ThemeDataSource {
-  ThemeDataSource({
-    required SharedPreferences prefs,
-  }) : _prefs = prefs;
+  const ThemeDataSource({
+    required this.prefs,
+  });
 
   static const String keyThemeMode = 'theme_mode';
 
-  final SharedPreferences _prefs;
+  final SharedPreferences prefs;
 
   ThemeMode get themeMode {
-    final key = _prefs.getString(keyThemeMode);
+    final key = prefs.getString(keyThemeMode);
     return ThemeMode.values.firstWhere(
       (e) => e.name == key,
       orElse: () => ThemeMode.system,
@@ -27,7 +27,7 @@ class ThemeDataSource {
   }
 
   set themeMode(ThemeMode theme) {
-    _prefs.setString(
+    prefs.setString(
       keyThemeMode,
       theme.name,
     );

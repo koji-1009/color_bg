@@ -33,7 +33,7 @@ Future<void> main() async {
         hiveHistoryBoxProvider.overrideWithValue(historyBox),
         prefsProvider.overrideWithValue(prefs),
       ],
-      child: App(),
+      child: const App(),
     ),
   );
 }
