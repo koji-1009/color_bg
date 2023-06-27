@@ -45,10 +45,10 @@ packages:
     dependency: "direct main"
     description:
       name: breakpoints_mq
-      sha256: "26975061f00191914e45a81f816ef25583ea42454431ea7361b366d8b18341ae"
+      sha256: "65b1730d79bc4844c5c05bab6afcd9bccc6cb38367dbb8b732b90d3aef068ad6"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "3.1.0"
   build:
     dependency: transitive
     description:

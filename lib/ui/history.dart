@@ -5,17 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-class HistoryPage extends ConsumerStatefulWidget {
+class HistoryPage extends ConsumerWidget {
   const HistoryPage({super.key});
 
   @override
-  ConsumerState<HistoryPage> createState() => _HistoryPageState();
-}
-
-class _HistoryPageState extends ConsumerState<HistoryPage> {
-  @override
-  Widget build(BuildContext context) {
-    final margin = MediaQuery.of(context).breakpointMargin;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final margin = context.breakpointMargin;
     final locale = Localizations.localeOf(context);
     final format = DateFormat.yMd(locale.languageCode).add_Hms();
 
@@ -46,11 +41,9 @@ class _HistoryPageState extends ConsumerState<HistoryPage> {
                         await box.clear();
                         ref.invalidate(hiveHistoryBoxProvider);
 
-                        if (!mounted) {
-                          return;
+                        if (context.mounted) {
+                          Navigator.of(context).pop();
                         }
-
-                        Navigator.of(context).pop();
                       },
                       child: const Text('OK'),
                     ),

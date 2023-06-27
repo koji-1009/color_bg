@@ -16,7 +16,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final margin = MediaQuery.of(context).breakpointMargin;
+    final margin = context.breakpointMargin;
 
     final question = ref.watch(questionProvider);
     final mode = ref.watch(
@@ -33,7 +33,6 @@ class HomePage extends ConsumerWidget {
               switch (value) {
                 case _OptionMenu.history:
                   context.go('/history');
-                  break;
                 case _OptionMenu.themeMode:
                   final mode = await showMenu(
                     context: context,
@@ -58,12 +57,10 @@ class HomePage extends ConsumerWidget {
                   }
 
                   ref.read(themeModeProvider.notifier).update(mode);
-                  break;
                 case _OptionMenu.license:
                   showLicensePage(
                     context: context,
                   );
-                  break;
               }
             },
             itemBuilder: (context) => const [
@@ -231,21 +228,20 @@ class HomePage extends ConsumerWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            mode == PlayMode.rgb
-                                ? Text(
-                                    'R: ${question.red}, '
-                                    'G: ${question.green}, '
-                                    'B: ${question.blue}',
-                                    style:
-                                        Theme.of(context).textTheme.titleLarge,
-                                  )
-                                : Text(
-                                    'H: ${question.hsv.hue.toStringAsFixed(1)}, '
-                                    'S: ${question.hsv.saturation.toStringAsFixed(2)}, '
-                                    'V: ${question.hsv.value.toStringAsFixed(2)}',
-                                    style:
-                                        Theme.of(context).textTheme.titleLarge,
-                                  ),
+                            if (mode == PlayMode.rgb)
+                              Text(
+                                'R: ${question.red}, '
+                                'G: ${question.green}, '
+                                'B: ${question.blue}',
+                                style: Theme.of(context).textTheme.titleLarge,
+                              )
+                            else
+                              Text(
+                                'H: ${question.hsv.hue.toStringAsFixed(1)}, '
+                                'S: ${question.hsv.saturation.toStringAsFixed(2)}, '
+                                'V: ${question.hsv.value.toStringAsFixed(2)}',
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
                             const SizedBox(
                               height: 32,
                             ),
