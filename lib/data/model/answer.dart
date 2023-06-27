@@ -6,7 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'answer.freezed.dart';
 
 @freezed
-class Answer with _$Answer {
+sealed class Answer with _$Answer {
   const factory Answer({
     @Default(PlayMode.rgb) PlayMode mode,
     required ColorRGB rgb,
@@ -21,7 +21,7 @@ class Answer with _$Answer {
 }
 
 @freezed
-class ColorEntity with _$ColorEntity {
+sealed class ColorEntity with _$ColorEntity {
   const factory ColorEntity.rgb({
     @Default(125) int r,
     @Default(125) int g,
