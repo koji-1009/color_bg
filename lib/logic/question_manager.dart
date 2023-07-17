@@ -1,11 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/painting.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final questionProvider = Provider.autoDispose(
-  (_) => ColorExt.random(),
-);
+part 'question_manager.g.dart';
+
+@riverpod
+Color question(_) => ColorExt.random();
 
 final _seed = Random();
 

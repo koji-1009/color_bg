@@ -1,4 +1,4 @@
-import 'package:color_bootcamp/logic/app_theme_manager.dart';
+import 'package:color_bootcamp/data/local/theme_mode_notifier.dart';
 import 'package:color_bootcamp/router.dart';
 import 'package:color_bootcamp/ui/theme.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeModeProvider);
+    final themeMode = ref.watch(themeModeNotifierProvider);
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
