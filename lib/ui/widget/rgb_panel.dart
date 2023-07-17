@@ -9,7 +9,7 @@ class RgbPanel extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final rgb = ref.watch(
-      answerProvider.select((value) => value.rgb),
+      answerManagerProvider.select((value) => value.rgb),
     );
 
     return Column(
@@ -19,7 +19,7 @@ class RgbPanel extends ConsumerWidget {
           selectColor: Color.fromARGB(255, rgb.r, 0, 0),
           title: 'R',
           setValue: (value) {
-            ref.read(answerProvider.notifier).updateR(value.round());
+            ref.read(answerManagerProvider.notifier).updateR(value.round());
           },
         ),
         ValueSlider.rgb(
@@ -27,7 +27,7 @@ class RgbPanel extends ConsumerWidget {
           selectColor: Color.fromARGB(255, 0, rgb.g, 0),
           title: 'G',
           setValue: (value) {
-            ref.read(answerProvider.notifier).updateG(value.round());
+            ref.read(answerManagerProvider.notifier).updateG(value.round());
           },
         ),
         ValueSlider.rgb(
@@ -35,7 +35,7 @@ class RgbPanel extends ConsumerWidget {
           selectColor: Color.fromARGB(255, 0, 0, rgb.b),
           title: 'B',
           setValue: (value) {
-            ref.read(answerProvider.notifier).updateB(value.round());
+            ref.read(answerManagerProvider.notifier).updateB(value.round());
           },
         ),
       ],

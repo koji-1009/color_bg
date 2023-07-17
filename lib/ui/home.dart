@@ -1,9 +1,9 @@
 import 'package:breakpoints_mq/breakpoints_mq.dart';
+import 'package:color_bootcamp/data/local/theme_mode_notifier.dart';
 import 'package:color_bootcamp/data/model/answer.dart';
 import 'package:color_bootcamp/data/model/play_mode.dart';
 import 'package:color_bootcamp/ext/color_ext.dart';
 import 'package:color_bootcamp/logic/answer_manager.dart';
-import 'package:color_bootcamp/logic/app_theme_manager.dart';
 import 'package:color_bootcamp/logic/question_manager.dart';
 import 'package:color_bootcamp/ui/widget/hsv_panel.dart';
 import 'package:color_bootcamp/ui/widget/rgb_panel.dart';
@@ -20,7 +20,7 @@ class HomePage extends ConsumerWidget {
 
     final question = ref.watch(questionProvider);
     final mode = ref.watch(
-      answerProvider.select((value) => value.mode),
+      answerManagerProvider.select((value) => value.mode),
     );
 
     return Scaffold(
@@ -56,7 +56,7 @@ class HomePage extends ConsumerWidget {
                     return;
                   }
 
-                  ref.read(themeModeProvider.notifier).update(mode);
+                  ref.read(themeModeNotifierProvider.notifier).update(mode);
                 case _OptionMenu.license:
                   showLicensePage(
                     context: context,
@@ -96,7 +96,7 @@ class HomePage extends ConsumerWidget {
                 ToggleButtons(
                   isSelected: mode.isSelectedList,
                   onPressed: (index) {
-                    ref.read(answerProvider.notifier).changePlayMode(
+                    ref.read(answerManagerProvider.notifier).changePlayMode(
                           mode: PlayMode.values[index],
                         );
                   },
@@ -128,8 +128,8 @@ class HomePage extends ConsumerWidget {
         icon: const Icon(Icons.check),
         label: const Text('Check'),
         onPressed: () {
-          final checkTimes = ref.read(answerProvider.notifier).checkTimes();
-          final answer = ref.read(answerProvider.notifier).answer;
+          final checkTimes = ref.read(answerManagerProvider.notifier).checkTimes();
+          final answer = ref.read(answerManagerProvider.notifier).answer;
 
           showModalBottomSheet(
             context: context,
@@ -147,7 +147,7 @@ class HomePage extends ConsumerWidget {
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Text(
-                      ref.read(answerProvider.notifier).scoreText(),
+                      ref.read(answerManagerProvider.notifier).scoreText(),
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     const SizedBox(
@@ -190,7 +190,7 @@ class HomePage extends ConsumerWidget {
                     OutlinedButton(
                       child: const Text('next color'),
                       onPressed: () {
-                        ref.read(answerProvider.notifier).saveResult();
+                        ref.read(answerManagerProvider.notifier).saveResult();
                         ref.invalidate(questionProvider);
 
                         Navigator.of(context).pop();
@@ -248,7 +248,7 @@ class HomePage extends ConsumerWidget {
                             OutlinedButton(
                               child: const Text('next color'),
                               onPressed: () {
-                                ref.read(answerProvider.notifier).saveResult();
+                                ref.read(answerManagerProvider.notifier).saveResult();
                                 ref.invalidate(questionProvider);
 
                                 Navigator.of(context).pop();

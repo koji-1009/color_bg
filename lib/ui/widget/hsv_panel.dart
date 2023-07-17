@@ -9,7 +9,7 @@ class HsvPanel extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final hsv = ref.watch(
-      answerProvider.select((value) => value.hsv),
+      answerManagerProvider.select((value) => value.hsv),
     );
 
     return Column(
@@ -22,7 +22,7 @@ class HsvPanel extends ConsumerWidget {
           divisions: 3600,
           decimal: 1,
           setValue: (value) {
-            ref.read(answerProvider.notifier).updateH(value);
+            ref.read(answerManagerProvider.notifier).updateH(value);
           },
         ),
         ValueSlider.hsv(
@@ -33,7 +33,7 @@ class HsvPanel extends ConsumerWidget {
           divisions: 100,
           decimal: 2,
           setValue: (value) {
-            ref.read(answerProvider.notifier).updateS(value);
+            ref.read(answerManagerProvider.notifier).updateS(value);
           },
         ),
         ValueSlider.hsv(
@@ -44,7 +44,7 @@ class HsvPanel extends ConsumerWidget {
           divisions: 100,
           decimal: 2,
           setValue: (value) {
-            ref.read(answerProvider.notifier).updateV(value);
+            ref.read(answerManagerProvider.notifier).updateV(value);
           },
         ),
       ],
