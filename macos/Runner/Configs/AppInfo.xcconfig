@@ -11,4 +11,4 @@ PRODUCT_NAME = color_bootcamp
 PRODUCT_BUNDLE_IDENTIFIER = com.dr1009.app.colorBootcamp
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.dr1009.app. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2024 com.dr1009.app. All rights reserved.
